@@ -24,13 +24,14 @@ public class Users implements Serializable {
 	private String mail;
 	private String nom;
 	private List<ClaimSubject> claimsubjectsuser;
-	private List <ClaimComments> claimcommentsuser;
+//	private List <ClaimComments> claimcommentsuser;
 	private List<Attribution> attributions;
 	private List<Visibility> visibilityusers;
 	private List<Subject> subjectscomment;
     private List<Subject> subjects;
     private Users userpm;
     private List<Users> utilisateurspm;
+    private List<Comments>comments;
 	private static final long serialVersionUID = 1L;
 
 	public Users() {
@@ -132,13 +133,13 @@ public class Users implements Serializable {
 	public void setVisibilityusers(List<Visibility> visibilityusers) {
 		this.visibilityusers = visibilityusers;
 	}
-	@OneToMany(mappedBy="utilisateurclaim",fetch=FetchType.EAGER)	
-	public List <ClaimComments> getClaimcommentsuser() {
-		return claimcommentsuser;
-	}
-	public void setClaimcommentsuser(List <ClaimComments> claimcommentsuser) {
-		this.claimcommentsuser = claimcommentsuser;
-	}
+//	@OneToMany(mappedBy="utilisateurclaim",fetch=FetchType.EAGER)	
+//	public List <ClaimComments> getClaimcommentsuser() {
+//		return claimcommentsuser;
+//	}
+//	public void setClaimcommentsuser(List <ClaimComments> claimcommentsuser) {
+//		this.claimcommentsuser = claimcommentsuser;
+//	}
 	@ManyToOne
 	@JoinColumn(name="user_fk")
 	public Users getUserpm() {
@@ -154,5 +155,13 @@ public class Users implements Serializable {
 	public void setUtilisateurspm(List<Users> utilisateurspm) {
 		this.utilisateurspm = utilisateurspm;
 	}
+	@OneToMany(mappedBy="users")
+	public List<Comments> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
+	
 	
 }

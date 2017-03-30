@@ -34,7 +34,7 @@ public class AdminFilter implements Filter {
 	public void destroy() {
 		// TODO Auto-generated method stub
 	}
-/*
+
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */

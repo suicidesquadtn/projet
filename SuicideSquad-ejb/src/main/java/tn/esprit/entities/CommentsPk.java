@@ -2,7 +2,7 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
+import java.util.Date;
 /**
  * Entity implementation class for Entity: CommentsPk
  *
@@ -13,6 +13,7 @@ public class CommentsPk implements Serializable {
 
     private int userId;
     private int subjectId;
+    private Date dateCreation;
 	private static final long serialVersionUID = 1L;
 
 	public CommentsPk() {
@@ -35,10 +36,21 @@ public class CommentsPk implements Serializable {
 		this.subjectId = subjectId;
 	}
 
+	
+
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((dateCreation == null) ? 0 : dateCreation.hashCode());
 		result = prime * result + subjectId;
 		result = prime * result + userId;
 		return result;
@@ -53,11 +65,17 @@ public class CommentsPk implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CommentsPk other = (CommentsPk) obj;
+		if (dateCreation == null) {
+			if (other.dateCreation != null)
+				return false;
+		} else if (!dateCreation.equals(other.dateCreation))
+			return false;
 		if (subjectId != other.subjectId)
 			return false;
 		if (userId != other.userId)
 			return false;
 		return true;
 	}
+	
    
 }

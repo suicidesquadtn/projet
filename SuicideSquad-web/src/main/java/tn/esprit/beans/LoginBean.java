@@ -1,6 +1,7 @@
 package tn.esprit.beans;
 
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -44,7 +45,6 @@ public String verifier(){
 	System.out.println("in verifier");
 	 u=myService.authentificate(login,password);
  if(u!=null){
-		System.out.println("in verifier true");
 	 setIsLoggedIn(true); 
 	 return "index"; }
  else
@@ -77,6 +77,6 @@ public Boolean ModerateurOrNot(Users u){
 		return false;
  }	 
 
- 
+
 
 }

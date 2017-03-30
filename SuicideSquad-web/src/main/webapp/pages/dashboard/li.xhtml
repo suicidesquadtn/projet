@@ -13,92 +13,7 @@
 		    <!-- DASHBOARD BODY -->
     <div class="dashboard-body">
         <!-- DASHBOARD HEADER -->
-        <div class="dashboard-header retracted">
-            <!-- DB CLOSE BUTTON -->
-            <a href="index.html" class="db-close-button">
-               <img src="#{request.contextPath}/resources/images/dashboard/back-icon.png" alt="back-icon"/>
-            </a>
-            <!-- DB CLOSE BUTTON -->
-
-			<!-- DB OPTIONS BUTTON -->
-            <div class="db-options-button">
-               <img src="#{request.contextPath}/resources/images/dashboard/db-list-right.png" alt="db-list-right"/>
-			   <img src="#{request.contextPath}/resources/images/dashboard/close-icon.png" alt="close-icon"/>
-            </div>
-            <!-- DB OPTIONS BUTTON -->
-
-            <!-- DASHBOARD HEADER ITEM -->
-            <div class="dashboard-header-item title">
-                <!-- DB SIDE MENU HANDLER -->
-                 <div class="db-side-menu-handler">
-                    <img src="#{request.contextPath}/resources/images/dashboard/db-list-left.png" alt="db-list-left"/>
-                </div>
-                <!-- /DB SIDE MENU HANDLER -->
-                <h6>Your Dashboard</h6>
-            </div>
-            <!-- /DASHBOARD HEADER ITEM -->
-
-			<!-- DASHBOARD HEADER ITEM -->
-            <div class="dashboard-header-item form">
-                <form class="dashboard-search">
-                    <input type="text" name="search" id="search_dashboard" placeholder="Search on dashboard..."/>
-                    <input type="image" src="#{request.contextPath}/resources/images/dashboard/search-icon.png" alt="search-icon"/>
-                </form>
-            </div>
-            <!-- /DASHBOARD HEADER ITEM -->
-
-            <!-- DASHBOARD HEADER ITEM -->
-            <div class="dashboard-header-item stats">
-                <!-- STATS META -->
-                <div class="stats-meta">
-                    <div class="pie-chart pie-chart1">
-                        <!-- SVG PLUS -->
-                        <svg class="svg-plus primary">
-                            <use xlink:href="#svg-plus"></use>
-                        </svg>
-                        <!-- /SVG PLUS -->
-                    </div>
-                    <h6>64.579</h6>
-                    <p>New Original Visits</p>
-                </div>
-                <!-- /STATS META -->
-            </div>
-            <!-- /DASHBOARD HEADER ITEM -->
-
-            <!-- DASHBOARD HEADER ITEM -->
-            <div class="dashboard-header-item stats">
-                <!-- STATS META -->
-                <div class="stats-meta">
-                    <div class="pie-chart pie-chart2">
-                        <!-- SVG PLUS -->
-                        <svg class="svg-minus tertiary">
-                            <use xlink:href="#svg-minus"></use>
-                        </svg>
-                        <!-- /SVG PLUS -->
-                    </div>
-                    <h6>20.8</h6>
-                    <p>Less Sales Than Last Month</p>
-                </div>
-                <!-- /STATS META -->
-            </div>
-            <!-- /DASHBOARD HEADER ITEM -->
-
-            <!-- DASHBOARD HEADER ITEM -->
-            <div class="dashboard-header-item stats">
-                <!-- STATS META -->
-                <div class="stats-meta">
-                    <div class="pie-chart pie-chart3">
-                        <!-- SVG PLUS -->
-                        <svg class="svg-plus primary">
-                            <use xlink:href="#svg-plus"></use>
-                        </svg>
-                        <!-- /SVG PLUS -->
-                    </div>
-                    <h6>322k</h6>
-                    <p>Total Visits This Month</p>
-                </div>
-                </div>
-                <h1>.</h1>
+        <div class="dashboard-content">
 	<div class="gradient">
 	<div class="headline filter primary">
                 <h4>Gestion Moderateurs</h4>
@@ -140,6 +55,12 @@
        <p:column>
         <h:commandButton action="#{formateurBean.doDelete(former)}" value="delete" />
     </p:column>
+    
+    
+ 
+    
+    
+    
           <p:column>
       <h:commandButton  value="update" >
        <f:setPropertyActionListener value="#{true}" target="#{formateurBean.visible}"></f:setPropertyActionListener>
@@ -150,6 +71,7 @@
     </p:column>
 </p:dataTable>
 <h:commandButton action="#{formateurBean.initialiser()}" value="Ajouter" />
+<h:outputText value="#{formateurBean.nbrComments}" />
 
 	</h:form>
 	<h:form rendered="#{formateurBean.visible}">
@@ -192,12 +114,178 @@
 <h:commandButton action="#{formateurBean.doUpdate()}" value="Valider" />
 
 </h:panelGrid>
+
 	</h:form>
 
 </div>
-</div>
+
+
+<div class="gradient">
+	<div class="headline filter primary">
+<h4>Gestion Membres</h4>
+            </div>
+
+	<h:form>
+		<p:dataTable var="former" value="#{MembreBean.ms}">
+    <p:column headerText="Id">
+        <h:outputText value="#{former.userId}" />
+    </p:column>
+ <p:column headerText="date">
+        <h:outputText value="#{former.date}" />
+    </p:column>
+ <p:column headerText="image">
+        <h:outputText value="#{former.image}" />
+    </p:column>
+ 
+ 
+    <p:column headerText="nom">
+        <h:outputText value="#{former.nom}" />
+    </p:column>
+ 
+    <p:column headerText="login">
+        <h:outputText value="#{former.login}" />
+       
+    </p:column>
+ 
+    <p:column headerText="password">
+        <h:outputText value="#{former.pwd}" />
+    </p:column>
+    <p:column>
+     <h:commandButton value="IsActive:#{MembreBean.m.subscriber}" action="#{MembreBean.doActiveUser()}" >
+        
+        <f:setPropertyActionListener value="#{former}" target="#{MembreBean.m}"/>
+       
+        </h:commandButton>
+    </p:column>
+       <p:column>
+        <h:commandButton action="#{MembreBean.doDelete(former)}" value="delete" />
+    </p:column>
+          <p:column>
+      <h:commandButton  value="update" action="#{MembreBean.doUpdate()}" >
+       <f:setPropertyActionListener value="#{true}" target="#{MembreBean.visible}"></f:setPropertyActionListener>
+        <f:setPropertyActionListener value="#{former}" target="#{MembreBean.m}"></f:setPropertyActionListener>
+       
+       
+        </h:commandButton>
+    </p:column>
+</p:dataTable>
+<h:commandButton action="#{MembreBean.initialiser()}" value="Ajouter" />
+
+
+	</h:form>
+
+	
+	<h:form rendered="#{MembreBean.visible}">
+	<h:panelGrid >
+
+		<div class="col-md-8 col-sm-8">
+
+<h:outputText value="Nom:" />
+<h:inputText id="nomF" value="#{MembreBean.m.nom}" validatorMessage="Verifier le nom" >
+<f:validateRequired pattern="[a-zA-Z+1-9+]+"></f:validateRequired>
+</h:inputText>
+<h:message for="nomF" style="color:red"/>
+
+<h:outputText value="login:" />
+<h:inputText id="logF" value="#{MembreBean.m.login}" validatorMessage="verifier login">
+<f:validateRegex pattern="[a-zA-Z+1-9+]+"></f:validateRegex>
+</h:inputText>
+<h:message for="logF" style="color:red"/>
+
+<h:outputText  value="Password:" />
+<h:inputText id="pwdF" value="#{MembreBean.m.pwd}" > 
+<f:validateRegex pattern="[a-zA-Z+1-9+]+"></f:validateRegex>
+<f:validateLength minimum="1" maximum="10"></f:validateLength>
+</h:inputText>
+<h:message for="pwdF" style="color:red"/>
+
+
+
+
+<h:outputText  value="mail:" />
+<h:inputText id="mailF" value="#{MembreBean.m.mail}" > 
+</h:inputText>
+
+<h:outputText value="Section :" />
+
+
+
+
+
+<h:commandButton action="#{MembreBean.doUpdate1()}" value="Valider" />
+
+
 </div>
 
+
+
+	<div class="col-md-4 col-sm-12">
+<div class="form-box-item">
+					<h4>Statistiques #{MembreBean.m.nom}</h4>
+					<hr class="line-separator"/>
+					<!-- TEXT ICONS -->
+					<div class="text-icons">
+						<!-- TEXT ICON -->
+
+						<!-- /TEXT ICON -->
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon blue">
+								<span class="sl-icon icon-cup"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.nbrSub}</p>
+							<p>Number of Subjects shared</p>
+						</div>
+						<!-- /TEXT ICON -->
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon red">
+								<span class="sl-icon icon-fire"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.m.grade}</p>
+							<p>Member grade</p>
+						</div>
+						<!-- /TEXT ICON -->
+
+
+
+
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon violet">
+								<span class="sl-icon icon-heart"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.nbrLikes}</p>
+							<p>Likes for comments</p>
+						</div>
+						<!-- /TEXT ICON -->
+					</div>
+					<!-- /TEXT ICONS -->
+
+					<!-- TEXT ICON -->
+					<div class="text-icon">
+						<div class="ticon green">
+							<span class="sl-icon icon-bubble"></span>
+						</div>
+						<p class="text-header mid">#{MembreBean.nbreC}</p>
+						<p >Number of comments shared</p>
+						</div>
+					<!-- /TEXT ICON -->
+				</div>
+				
+</div>
+
+</h:panelGrid>
+	</h:form>
+
+
+
+</div>
+</div>
+</div>
 	</ui:define>
 	</ui:composition>
 </html>

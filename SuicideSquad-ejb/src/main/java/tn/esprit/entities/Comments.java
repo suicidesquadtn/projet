@@ -2,7 +2,6 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import java.lang.String;
-import java.util.List;
 
 import javax.persistence.*;
 
@@ -11,14 +10,14 @@ import javax.persistence.*;
  *
  */
 @Entity
-
 public class Comments implements Serializable {
 
 	private CommentsPk commentsId;
+	private int aime;
 	private String content;
-	private List <ClaimComments> commentsclaim;
+
 	private static final long serialVersionUID = 1L;
- 
+    Users users;
 	public Comments() {
 		super();
 	}   
@@ -36,12 +35,25 @@ public class Comments implements Serializable {
 	public void setCommentsId(CommentsPk commentsId) {
 		this.commentsId = commentsId;
 	}
-	@OneToMany(mappedBy="commentclaim",fetch=FetchType.EAGER)
-	public List <ClaimComments> getCommentsclaim() {
-		return commentsclaim;
+
+	@ManyToOne
+	@JoinColumn(name="userId",referencedColumnName="UserId",updatable=false,insertable=false)
+	public Users getUsers() {
+		return users;
 	}
-	public void setCommentsclaim(List <ClaimComments> commentsclaim) {
-		this.commentsclaim = commentsclaim;
+	public void setUsers(Users users) {
+		this.users = users;
 	}
+	public int getAime() {
+		return aime;
+	}
+	public void setAime(int aime) {
+		this.aime = aime;
+	}
+	
+	
+
+	
+	
    
 }

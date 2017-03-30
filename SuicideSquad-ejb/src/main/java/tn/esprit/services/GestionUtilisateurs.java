@@ -2,11 +2,13 @@ package tn.esprit.services;
 
 import java.util.List;
 
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import tn.esprit.entities.Member;
 import tn.esprit.entities.Moderator;
 import tn.esprit.entities.Section;
 import tn.esprit.entities.Users;
@@ -137,4 +139,88 @@ public class GestionUtilisateurs implements GestionUtilisateursRemote,gestionUti
 		}
 		return null;
 	}
+	
+	@Override
+	public Users bestUser() {
+		List<Users> users = em.createQuery("SELECT u FROM Users u ", Users.class)
+		.getResultList();
+		long max=0;
+		Users bestUser = new Users();
+		for (Users user : users) {
+			long count =0;
+// 		long discution = (long) em.createQuery("SELECT count(d.user.id) FROM User u Join u.discutions d where u.id=?1 " ).setParameter(1,user.getId())
+// 				.getSingleResult();
+		long comment = (long) em.createQuery("SELECT count(i.userId) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,user.getUserId())
+				.getSingleResult();
+// 		long rating = (long) em.createQuery("SELECT count(i.id) FROM User u Join u.rating r JOIN r.ratingId i where u.id=?1 " ).setParameter(1,user.getId())
+// 			.getSingleResult();
+//		count = discution+comment+carpool ;
+		count = comment;
+		if (count>max){
+			max=count;
+			bestUser=user;
+		}
+		}
+		return bestUser;
+	}
+
+	
+	@Override
+//	@Schedule(hour="*",minute="*",second="*/20")
+	public void grade() {
+		List<Users> users = em.createQuery("SELECT u FROM Users u ", Users.class)
+		.getResultList();
+
+		for (Users user : users) {
+		
+		int id=user.getUserId();
+		
+			long count =0;
+		long comment = (long) em.createQuery("SELECT count(i.userId) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
+				.getSingleResult();
+	
+		long aimes = (long) em.createQuery("SELECT sum(c.aime) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
+				.getSingleResult(); 
+		
+		
+		long subject = (long) em.createQuery("SELECT count(s.utilisateur) FROM Subject s  where s.utilisateur.userId=?1 " ).setParameter(1,id)
+				.getSingleResult();
+		
+		
+		Member m = em.createQuery("SELECT u FROM Member u where u.userId=?1 " ,Member.class).setParameter(1,id)
+				.getSingleResult();
+count= aimes+subject+comment-m.getNbrParticipatin();
+if((count>1)&&(m.getGrade()<5)){
+	m.setGrade(m.getGrade()+1);
+	m.setNbrParticipatin((int)count+m.getNbrParticipatin());
+	em.merge(m);
+	Member m2 = em.createQuery("SELECT u FROM Member u where u.userId=?1 " ,Member.class).setParameter(1,id)
+			.getSingleResult();
+	//System.out.println(m2.getNom());
+	//System.out.println("---------------------------"+aimes+"---------------------");
+	
+}}
+		System.out.println("**************************************************************");
+	}
+	@Override
+public long nbrComments(int id){
+	 long comment = (long) em.createQuery("SELECT count(i.userId) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
+			.getSingleResult();
+	 return comment;
+}
+	@Override
+public long nbrSujets(int id){
+		long subject = (long) em.createQuery("SELECT count(s.utilisateur) FROM Subject s  where s.utilisateur.userId=?1 " ).setParameter(1,id)
+				.getSingleResult();
+	 return subject;
+}
+	@Override
+public long nbrLikes(int id){
+		long aimes = (long) em.createQuery("SELECT sum(c.aime) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
+				.getSingleResult(); 
+		System.out.println("test ************" + aimes +"**************");
+	 return aimes;
+}	
+	
+	
 }

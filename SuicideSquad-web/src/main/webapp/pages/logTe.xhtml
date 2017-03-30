@@ -321,7 +321,7 @@
 				<!-- ACCOUNT ACTIONS -->
 				<div class="account-actions">
 					
-	<h:commandButton action="#{myLogBean.logout()}" value="Logout"  class="button secondary"/>
+	<h:commandButton action="#{myLogBean.logout()}" value="Logout"  class="button medium secondary"/>
 				</div>
 	</h:form>
 </c:if>
@@ -330,7 +330,7 @@
 <c:if test="${test == null }">
 				<div class="account-actions no-space">
        <h:link outcome="/pages/dashboard/reg" class="button primary">Register</h:link>
-	   <h:link outcome="/pages/dashboard/Login" class="button secondary">Login</h:link>   
+	   <h:link outcome="/pages/Login" class="button secondary">Login</h:link>   
 	   				</div>
 	   
 </c:if>	

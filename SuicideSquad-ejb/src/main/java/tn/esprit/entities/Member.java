@@ -16,30 +16,49 @@ import tn.esprit.entities.Users;
 public class Member extends Users implements Serializable {
 
 	
-	private String Grade;
+	private int Grade;
+	private int nbrParticipatin;
 	private boolean Subscriber;
 	private static final long serialVersionUID = 1L;
 
 	public Member() {
 		super();
 	}   
-	public String getGrade() {
-		return this.Grade;
+	 
+	
+	public int getGrade() {
+		return Grade;
 	}
 
-	public void setGrade(String Grade) {
-		this.Grade = Grade;
-	}   
-	public boolean getSubscriber() {
-		return this.Subscriber;
+
+	public void setGrade(int grade) {
+		Grade = grade;
 	}
 
-	public void setSubscriber(boolean Subscriber) {
-		this.Subscriber = Subscriber;
+
+	public boolean isSubscriber() {
+		return Subscriber;
 	}
+
+
+	public void setSubscriber(boolean subscriber) {
+		Subscriber = subscriber;
+	}
+
+
 	public Member(String login, String pwd, String image, Date date, String mail, String nom) {
 		super(login, pwd, image, date, mail, nom);
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public int getNbrParticipatin() {
+		return nbrParticipatin;
+	}
+
+
+	public void setNbrParticipatin(int nbrParticipatin) {
+		this.nbrParticipatin = nbrParticipatin;
 	}
 	
    

@@ -1,3 +1,4 @@
+
 package tn.esprit.beans;
 import java.util.ArrayList;
 import java.util.Date;
@@ -5,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.Schedule;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
@@ -20,7 +22,7 @@ public class UsersBean {
   private Moderator Moderator=new Moderator();
   private List<Moderator> Moderators=new ArrayList<Moderator>();
   private List<Section> sections = new ArrayList<Section>();
-  
+  private String nbrComments;
   private List<SelectItem> selectItemsForSections;
   private int selectedSectionId = -1;
   
@@ -48,6 +50,7 @@ private boolean visible=false;
 	public void setModerators(List<Moderator> moderators) {
 		Moderators = moderators;
 	}
+	
 public String doDelete(Users u){
 	myService.Delete(u);
 	init();
@@ -56,7 +59,9 @@ public String doDelete(Users u){
 
 @PostConstruct
 	public void init(){ 
+	
 	List<Section> sections = myService.getAllSections();
+	setNbrComments(myService.bestUser().getNom());
 	selectItemsForSections = new ArrayList<SelectItem>(sections.size());
 	for(Section section:sections){
 		selectItemsForSections.add(new SelectItem(section.getSectionId(),section.getNom()));
@@ -97,6 +102,10 @@ public boolean isVisible() {
 public void setVisible(boolean visible) {
 	this.visible = visible;
 }
+
+
+
+
 public int getSelectedSectionId() {
 	return selectedSectionId;
 }
@@ -109,6 +118,13 @@ public List<SelectItem> getSelectItemsForSections() {
 public void setSelectItemsForSections(List<SelectItem> selectItemsForSections) {
 	this.selectItemsForSections = selectItemsForSections;
 }
+public String getNbrComments() {
+	return nbrComments;
+}
+public void setNbrComments(String nbrComments) {
+	this.nbrComments = nbrComments;
+}
+
 
 
 }
