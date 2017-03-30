@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+            xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+	<ui:composition template="/template/tempdashboard.xhtml">
+	<ui:define name="contentdash">
+
+	 <!-- DASHBOARD BODY -->
+    <div class="dashboard-body">
+        <!-- DASHBOARD HEADER -->
+        <div class="dashboard-header retracted">
+            <!-- DB CLOSE BUTTON -->
+            <a href="index.html" class="db-close-button">
+               <img src="#{request.contextPath}/resources/images/dashboard/back-icon.png" alt="back-icon"/>
+            </a>
+            <!-- DB CLOSE BUTTON -->
+
+			<!-- DB OPTIONS BUTTON -->
+            <div class="db-options-button">
+               <img src="#{request.contextPath}/resources/images/dashboard/db-list-right.png" alt="db-list-right"/>
+			   <img src="#{request.contextPath}/resources/images/dashboard/close-icon.png" alt="close-icon"/>
+            </div>
+            <!-- DB OPTIONS BUTTON -->
+
+            <!-- DASHBOARD HEADER ITEM -->
+            <div class="dashboard-header-item title">
+                <!-- DB SIDE MENU HANDLER -->
+                 <div class="db-side-menu-handler">
+                    <img src="#{request.contextPath}/resources/images/dashboard/db-list-left.png" alt="db-list-left"/>
+                </div>
+                <!-- /DB SIDE MENU HANDLER -->
+                <h6>Your Dashboard</h6>
+            </div>
+            <!-- /DASHBOARD HEADER ITEM -->
+
+			<!-- DASHBOARD HEADER ITEM -->
+            <div class="dashboard-header-item form">
+                <form class="dashboard-search">
+                    <input type="text" name="search" id="search_dashboard" placeholder="Search on dashboard..."/>
+                    <input type="image" src="#{request.contextPath}/resources/images/dashboard/search-icon.png" alt="search-icon"/>
+                </form>
+            </div>
+            <!-- /DASHBOARD HEADER ITEM -->
+
+            <!-- DASHBOARD HEADER ITEM -->
+            <div class="dashboard-header-item stats">
+                <!-- STATS META -->
+                <div class="stats-meta">
+                    <div class="pie-chart pie-chart1">
+                        <!-- SVG PLUS -->
+                        <svg class="svg-plus primary">
+                            <use xlink:href="#svg-plus"></use>
+                        </svg>
+                        <!-- /SVG PLUS -->
+                    </div>
+                    <h6>64.579</h6>
+                    <p>New Original Visits</p>
+                </div>
+                <!-- /STATS META -->
+            </div>
+            <!-- /DASHBOARD HEADER ITEM -->
+
+            <!-- DASHBOARD HEADER ITEM -->
+            <div class="dashboard-header-item stats">
+                <!-- STATS META -->
+                <div class="stats-meta">
+                    <div class="pie-chart pie-chart2">
+                        <!-- SVG PLUS -->
+                        <svg class="svg-minus tertiary">
+                            <use xlink:href="#svg-minus"></use>
+                        </svg>
+                        <!-- /SVG PLUS -->
+                    </div>
+                    <h6>20.8</h6>
+                    <p>Less Sales Than Last Month</p>
+                </div>
+                <!-- /STATS META -->
+            </div>
+            <!-- /DASHBOARD HEADER ITEM -->
+
+            <!-- DASHBOARD HEADER ITEM -->
+            <div class="dashboard-header-item stats">
+                <!-- STATS META -->
+                <div class="stats-meta">
+                    <div class="pie-chart pie-chart3">
+                        <!-- SVG PLUS -->
+                        <svg class="svg-plus primary">
+                            <use xlink:href="#svg-plus"></use>
+                        </svg>
+                        <!-- /SVG PLUS -->
+                    </div>
+                    <h6>322k</h6>
+                    <p>Total Visits This Month</p>
+                </div>
+                <!-- /STATS META -->
+            </div>
+            <!-- /DASHBOARD HEADER ITEM -->
+
+			<!-- DASHBOARD HEADER ITEM -->
+            <div class="dashboard-header-item back-button">
+                <a href="index.html" class="button mid dark-light">Back to Homepage</a>
+            </div>
+            <!-- /DASHBOARD HEADER ITEM -->
+        </div>
+        <!-- DASHBOARD HEADER -->
+		<h:panelGroup id="repeater">
+		<h:form>
+        <!-- DASHBOARD CONTENT -->
+        <div class="dashboard-content">
+            <!-- HEADLINE -->
+ <!-- HEADLINE -->
+            <div class="headline inbox buttons two primary">
+                <h4>Your Inbox (36)</h4>
+                
+				<div class="button-wrap">
+					<!-- SLIDE CONTROLS -->
+					<div class="slide-control-wrap main" >
+									<h:commandLink action="#{gamesbean.paginator.prev}">
+						<div class="slide-control left">
+							<!-- SVG ARROW -->
+							<svg class="svg-arrow">
+								<use xlink:href="#svg-arrow"></use>
+							</svg>
+							<!-- /SVG ARROW -->
+						</div>
+						 <f:ajax render="repeater" execute="@this" /> 
+						         </h:commandLink>
+		
+<h:commandLink action="#{gamesbean.paginator.next}">
+						<div class="slide-control right">
+							<!-- SVG ARROW -->
+							<svg class="svg-arrow">
+								<use xlink:href="#svg-arrow"></use>
+							</svg>
+							<!-- /SVG ARROW -->
+						</div>
+						         <f:ajax render="repeater" execute="@this" /> 
+						         </h:commandLink>
+
+					</div>
+					<!-- /SLIDE CONTROLS -->
+				</div>
+				    <p:growl id="msgs" showDetail="true" />
+				
+					<!-- VIEW SELECTORS --> 
+    <h:inputText value="#{gamesbean.search}" class="button mid-short rounded search" style="color:black;" a:placeholder="Search Game..." onfocus="this.value = this.value;">
+        <p:ajax event="keyup" update="repeater" listener="#{gamesbean.filterList()}" />
+    </h:inputText>   
+</div>
+            <!-- /HEADLINE -->
+            <!-- /HEADLINE -->
+
+			<!-- INBOX MESSAGES -->
+			<div class="inbox-messages">
+				<!-- INBOX MESSAGE -->
+				<ui:repeat value="#{gamesbean.paginator.model}" var="subject" rendered="#{not empty   gamesbean.paginator.model}">
+				<div class="inbox-message">
+					<div class="inbox-message-actions">
+						<!-- CHECKBOX -->
+						<input type="checkbox" id="msg1" name="msg1"/>
+						<!-- /CHECKBOX -->
+
+						<!-- STARRED -->
+						<div class="starred">
+							<img src="#{request.contextPath}/resources/images/dashboard/star-empty.png" class="hidden" alt="star-empty"/>
+							<img src="#{request.contextPath}/resources/images/dashboard/star-filled.png" class="visible" alt="star-filled"/>
+						</div>
+						<!-- /STARRED -->
+					</div>
+					
+					<div class="inbox-message-author">
+						<figure class="user-avatar">
+							<o:graphicImage value="#{gamesbean.afficherImage(subject.image)}" dataURI="true" alt="user-img" style="height:40px;"/>
+
+						</figure>
+						<p class="text-header">
+							#{subject.category}
+							<span class="message-icon icon-envelope secondary"></span>
+						</p>
+					</div>
+
+					<a href="dashboard-openmessage.html">
+						<div class="inbox-message-content">
+							<p class="text-header">#{subject.name}</p>
+							<p class="description">#{subject.content}</p>
+						</div>
+					</a>
+
+					<div class="inbox-message-type">
+				
+						<h:commandLink action="#{gamesbean.doDelete(subject)}"><span class="message-icon icon-trash"></span></h:commandLink>
+	
+					</div>
+										<div class="inbox-message-type">
+<h:commandLink action="#{gamesbean.goToUpdatePage(subject)}">
+    <span class="message-icon icon-pencil"></span>
+</h:commandLink>					</div>
+			<div class="inbox-message-type">
+				
+						<h:commandLink action="#{gamesbean.accept(subject)}"><span class="message-icon icon-check"></span></h:commandLink>
+	
+					</div>
+				</div>
+				<!-- INBOX MESSAGE -->
+</ui:repeat>
+			</div>
+			<!-- /INBOX MESSAGES -->
+
+        </div>
+        <!-- DASHBOARD CONTENT -->			    <!-- /DASHBOARD BODY --></h:form>
+		</h:panelGroup>
+    </div>
+
+	
+	</ui:define>
+	</ui:composition>
+</html>

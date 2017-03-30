@@ -1,0 +1,385 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+	<ui:composition template="/template/template.xhtml">
+	<ui:define name="content">
+		<div class="section-headline-wrap">
+		<div class="section-headline">
+			<h2>Games</h2>
+			<p>Home<span class="separator">/</span>Games<span class="separator">/</span><span class="current-section">#{gamesbean.sujet.name}</span></p>
+		</div>
+	</div>
+	
+	<!-- SECTION -->
+	<div class="section-wrap">
+		<div class="section">
+			<!-- SIDEBAR -->
+			<div class="sidebar right">
+				<!-- SIDEBAR ITEM -->
+				<div class="sidebar-item void buttons">
+					<a href="#" class="button big dark purchase">
+						<span class="currency">45</span>
+						<span class="primary">Purchase Now!</span>
+					</a>
+					<a href="#" class="button big primary wcart">
+						<span class="icon-present"></span>
+						Add to the Cart
+					</a>
+					<a href="#" class="button big secondary wfav">
+						<span class="icon-heart"></span>
+						<span class="fav-count">652</span>
+						Add to Favourites
+					</a>
+				</div>
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				<div class="sidebar-item author-bio short">
+					<h4>Product Author</h4>
+					<hr class="line-separator"/>
+					<!-- USER AVATAR -->
+					<a href="user-profile.html" class="user-avatar-wrap medium">
+						<figure class="user-avatar medium">
+							<img src="images/avatars/avatar_09.jpg" alt=""/>
+						</figure>
+					</a>
+					<!-- /USER AVATAR -->
+					<p class="text-header">Odin_Design</p>
+					<p class="text-oneline">Super Samurai Developers<br/>Los Angeles, Usa</p>
+					<!-- SHARE LINKS -->
+					<ul class="share-links">
+						<li><a href="#" class="fb"></a></li>
+						<li><a href="#" class="twt"></a></li>
+						<li><a href="#" class="db"></a></li>
+					</ul>
+					<!-- /SHARE LINKS -->
+					<div class="clearfix"></div>
+					<a href="#" class="button mid dark spaced">Go to <span class="primary">Profile Page</span></a>
+					<a href="#" class="button mid dark-light">Send a Private Message</a>
+				</div>
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				<div class="sidebar-item product-info">
+					<h4>Product Information</h4>
+					<hr class="line-separator"/>
+					<!-- INFORMATION LAYOUT -->
+					<div class="information-layout v2">
+						<!-- INFORMATION LAYOUT ITEM -->
+						<div class="information-layout-item">
+							<p class="text-header">Subject release Date:</p>
+							<p>#{gamesbean.sujet.date}</p>
+						</div>
+						<!-- /INFORMATION LAYOUT ITEM -->
+
+						<!-- INFORMATION LAYOUT ITEM -->
+						<div class="information-layout-item">
+							<p class="text-header">Files Included:</p>
+							<p>Psd - Photoshop CS6, Ai - Illustrator CS3, Jpeg, Png</p>
+						</div>
+						<!-- /INFORMATION LAYOUT ITEM -->
+
+						<!-- INFORMATION LAYOUT ITEM -->
+						<div class="information-layout-item">
+							<p class="text-header">Dimensions:</p>
+							<p>4500x2800 Px</p>
+						</div>
+						<!-- /INFORMATION LAYOUT ITEM -->
+
+						<!-- INFORMATION LAYOUT ITEM -->
+						<div class="information-layout-item">
+							<p class="tags primary"><span>Tags:</span> <a href="#">photoshop</a>, <a href="#">flat</a>, <a href="#">icon</a>, <a href="#">devices</a>, <a href="#">mobile</a>, <a href="#">vector</a>, <a href="#">coffee</a>, <a href="#">scene</a>, <a href="#">hero</a>, <a href="#">image</a>, <a href="#">maker</a>, <a href="#">set</a>, <a href="#">tablet</a>, <a href="#">laptop</a>, <a href="#">mockup</a></p>
+						</div>
+						<!-- /INFORMATION LAYOUT ITEM -->
+					</div>
+					<!-- INFORMATION LAYOUT -->
+				</div>
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				<div class="sidebar-item author-reputation short">
+					<h4>Author's Reputation</h4>
+					<hr class="line-separator"/>
+					<!-- PIE CHART -->
+					<div class="pie-chart pie-chart1">
+						<span class="icon-dislike"></span>
+					</div>
+					<!-- /PIE CHART -->
+					<p class="text-header percent">24<span>%</span></p>
+					<div class="percent-meta">
+						<p class="text-header percent-info">Recommended</p>
+						<!-- RATING -->
+						<ul class="rating">
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item empty">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item empty">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item empty">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item empty">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+						</ul>
+						<!-- /RATING -->
+					</div>
+					<div class="clearfix"></div>
+					<a href="#" class="button mid dark-light">Read all the Customer Reviews</a>
+				</div>
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				<div class="sidebar-item author-items-v2">
+					<h4>More Author's Items</h4>
+					<hr class="line-separator"/>
+					<!-- ITEM PREVIEW -->
+					<div class="item-preview">
+						<a href="#">
+							<figure class="product-preview-image small liquid">
+								<img src="images/items/miniverse_s.jpg" alt=""/>
+							</figure>
+						</a>
+						<a href="#"><p class="text-header small">Miniverse - Hero Image Composer</p></a>
+						<p class="category tiny primary"><a href="#">Hero Image</a></p>
+						<p class="price"><span>$</span>14</p>
+					</div>
+					<!-- /ITEM PREVIEW -->
+
+					<!-- ITEM PREVIEW -->
+					<div class="item-preview">
+						<a href="#">
+							<figure class="product-preview-image small liquid">
+								<img src="images/items/patriot_s.jpg" alt=""/>
+							</figure>
+						</a>
+						<a href="#"><p class="text-header small">The Patriot - Flyer Template</p></a>
+						<p class="category tiny primary"><a href="#">Flyers</a></p>
+						<p class="price"><span>$</span>6</p>
+					</div>
+					<!-- /ITEM PREVIEW -->
+
+					<!-- ITEM PREVIEW -->
+					<div class="item-preview">
+						<a href="#">
+							<figure class="product-preview-image small liquid">
+								<img src="images/items/pixel_s.jpg" alt=""/>
+							</figure>
+						</a>
+						<a href="#"><p class="text-header small">Pixel Diamond Gaming Shop</p></a>
+						<p class="category tiny primary"><a href="#">Shopify</a></p>
+						<p class="price"><span>$</span>86</p>
+					</div>
+					<!-- /ITEM PREVIEW -->
+				</div>
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				<div class="sidebar-item author-reputation short">
+					<h4>Author's Reputation</h4>
+					<hr class="line-separator"/>
+					<!-- PIE CHART -->
+					<div class="pie-chart pie-chart2">
+						<span class="icon-like"></span>
+					</div>
+					<!-- /PIE CHART -->
+					<p class="text-header percent">86<span>%</span></p>
+					<div class="percent-meta">
+						<p class="text-header percent-info">Recommended</p>
+						<!-- RATING -->
+						<ul class="rating">
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+						</ul>
+						<!-- /RATING -->
+					</div>
+					<div class="clearfix"></div>
+					<a href="#" class="button mid dark-light">Read all the Customer Reviews</a>
+				</div>
+				<!-- /SIDEBAR ITEM -->
+
+				<!-- SIDEBAR ITEM -->
+				<div class="sidebar-item author-reputation short">
+					<h4>Author's Reputation</h4>
+					<hr class="line-separator"/>
+					<!-- PIE CHART -->
+					<div class="pie-chart pie-chart3">
+						<span class="icon-star"></span>
+					</div>
+					<!-- /PIE CHART -->
+					<p class="text-header percent">100<span>%</span></p>
+					<div class="percent-meta">
+						<p class="text-header percent-info">Recommended</p>
+						<!-- RATING -->
+						<ul class="rating">
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+							<li class="rating-item">
+								<!-- SVG STAR -->
+								<svg class="svg-star">
+									<use xlink:href="#svg-star"></use>
+								</svg>
+								<!-- /SVG STAR -->
+							</li>
+						</ul>
+						<!-- /RATING -->
+					</div>
+					<div class="clearfix"></div>
+					<a href="#" class="button mid dark-light">Read all the Customer Reviews</a>
+				</div>
+				<!-- /SIDEBAR ITEM -->
+			</div>
+			<!-- /SIDEBAR -->
+
+			<!-- CONTENT -->
+			<div class="content left">
+				<!-- POST -->
+				<article class="post">
+					<!-- POST IMAGE -->
+					<div class="post-image">
+						<figure class="product-preview-image large liquid">
+							<o:graphicImage value="#{gamesbean.afficherImage(subject.image)}" dataURI="true" alt="user-img" style="width:836px;height:484px;"/>
+						</figure>
+					</div>
+					<!-- /POST IMAGE -->
+					<hr class="line-separator"/>
+
+					<!-- POST CONTENT -->
+					<div class="post-content">
+						<!-- POST PARAGRAPH -->
+						<div class="post-paragraph">
+							<h3 class="post-title">#{gamesbean.sujet.name}:</h3>
+							<p>#{gamesbean.sujet.content}</p>
+						</div>
+						<!-- /POST PARAGRAPH -->
+
+						<!-- POST PARAGRAPH -->
+						<div class="post-paragraph">
+							<h3 class="post-title small">How to Install the Theme:</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in henderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						</div>
+
+
+						<div class="clearfix"></div>
+					</div>
+					<!-- /POST CONTENT -->
+
+					<hr class="line-separator"/>
+
+					<!-- SHARE -->
+					<div class="share-links-wrap">
+						<p class="text-header small">Share this:</p>
+						<!-- SHARE LINKS -->
+						<ul class="share-links hoverable">
+							<li><a href="#" class="fb"></a></li>
+							<li><a href="#" class="twt"></a></li>
+							<li><a href="#" class="db"></a></li>
+							<li><a href="#" class="rss"></a></li>
+							<li><a href="#" class="gplus"></a></li>
+						</ul>
+						<!-- /SHARE LINKS -->
+					</div>
+					<!-- /SHARE -->
+				</article>
+				<!-- /POST -->
+
+	
+			</div>
+			<!-- CONTENT -->
+		</div>
+	</div>
+	<!-- /SECTION -->
+	
+	</ui:define>
+	</ui:composition>
+</html>

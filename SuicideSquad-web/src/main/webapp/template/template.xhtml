@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg"> 
+<h:head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/vendor/simple-line-icons.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/vendor/tooltipster.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/vendor/owl.carousel.css"/>
+   <link rel="stylesheet" href="#{request.contextPath}/resources/css/vendor/magnific-popup.css"/>
+ <script type="text/javascript" src="#{request.contextPath}/resources/ckeditor/ckeditor.js" /> 
+ 	<link rel="stylesheet" href="#{request.contextPath}/resources/css/vendor/jquery.range.css"/>
+ 
+	<link rel="stylesheet" href="#{request.contextPath}/resources/css/style.css"/>
+	<!-- favicon -->
+	<link rel="icon" href="#{request.contextPath}/resources/images/favicon.ico"/>
+	<title>Emerald Dragon | Home</title>
+</h:head>
+<h:body> 
+<div id="header">
+ <ui:insert name="header">
+ <ui:include src="header.xhtml" />
+ </ui:insert>
+</div>
+<div id="content">
+ <ui:insert name="content">
+  </ui:insert>
+</div>
+ <ui:insert name="footer">
+ <ui:include src="footer.xhtml" />
+  </ui:insert>
+
+	<div class="shadow-film closed"></div>
+
+<!-- SVG ARROW -->
+<svg style="display: none;">	
+	<symbol id="svg-arrow" viewBox="0 0 3.923 6.64014" preserveAspectRatio="xMinYMin meet">
+		<path d="M3.711,2.92L0.994,0.202c-0.215-0.213-0.562-0.213-0.776,0c-0.215,0.215-0.215,0.562,0,0.777l2.329,2.329
+			L0.217,5.638c-0.215,0.215-0.214,0.562,0,0.776c0.214,0.214,0.562,0.215,0.776,0l2.717-2.718C3.925,3.482,3.925,3.135,3.711,2.92z"/>
+	</symbol>
+</svg>
+<!-- /SVG ARROW -->
+
+<!-- SVG STAR -->
+<svg style="display: none;">
+	<symbol id="svg-star" viewBox="0 0 10 10" preserveAspectRatio="xMinYMin meet">	
+		<polygon points="4.994,0.249 6.538,3.376 9.99,3.878 7.492,6.313 8.082,9.751 4.994,8.129 1.907,9.751 
+	2.495,6.313 -0.002,3.878 3.45,3.376 "/>
+	</symbol>
+</svg>
+<!-- /SVG STAR -->
+
+<!-- SVG PLUS -->
+<svg style="display: none;">
+	<symbol id="svg-plus" viewBox="0 0 13 13" preserveAspectRatio="xMinYMin meet">
+		<rect x="5" width="3" height="13"/>
+		<rect y="5" width="13" height="3"/>
+	</symbol>
+</svg>
+<!-- jQuery -->
+<script src="#{request.contextPath}/resources/js/vendor/jquery-3.1.0.min.js"></script>
+<!-- Tooltipster -->
+<script src="#{request.contextPath}/resources/js/vendor/jquery.tooltipster.min.js"></script>
+<!-- Owl Carousel -->
+<script src="#{request.contextPath}/resources/js/vendor/owl.carousel.min.js"></script>
+<!-- JRange -->
+<script src="#{request.contextPath}/resources/js/vendor/jquery.range.min.js"></script>
+<!-- Tweet -->
+<script src="#{request.contextPath}/resources/js/vendor/twitter/jquery.tweet.min.js"></script>
+<!-- xmAlerts -->
+<script src="#{request.contextPath}/resources/js/vendor/jquery.xmalert.min.js"></script>
+<!-- Magnific Popup -->
+<script src="#{request.contextPath}/resources/js/vendor/jquery.magnific-popup.min.js"></script>
+<!-- Side Menu -->
+<script src="#{request.contextPath}/resources/js/side-menu.js"></script>
+<!-- Home -->
+<script src="#{request.contextPath}/resources/js/home.js"></script>
+<!-- Tooltip -->
+<script src="#{request.contextPath}/resources/js/tooltip.js"></script>
+<!-- User Quickview Dropdown -->
+<script src="#{request.contextPath}/resources/js/user-board.js"></script>
+<!-- Home Alerts -->
+<script src="#{request.contextPath}/resources/js/home-alerts.js"></script>
+<!-- Footer -->
+<script src="#{request.contextPath}/resources/js/footer.js"></script>
+</h:body> 
+
+</html>

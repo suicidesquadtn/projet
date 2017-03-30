@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+	<ui:composition template="/template/template.xhtml">
+	<ui:define name="content">
+	<h:form>
+		<h:panelGroup id="repeater">
+	
+		<!-- SECTION HEADLINE -->
+	<div class="section-headline-wrap v3">
+		<div class="section-headline">
+			<h2>Games</h2>
+			<p>Home<span class="separator">/</span><span class="current-section">Games</span></p>
+		</div>
+	</div>
+	<!-- /SECTION HEADLINE -->
+
+	<!-- SECTION -->
+	<div class="section-wrap">
+		<div class="section">
+			<!-- CONTENT -->
+			<div class="content">
+				<!-- HEADLINE -->
+         <!-- HEADLINE -->
+            <div class="headline inbox buttons two primary">
+                <h4>Subjects</h4>
+                
+				<div class="button-wrap">
+					<!-- SLIDE CONTROLS -->
+					<div class="slide-control-wrap main" >
+									<h:commandLink action="#{gamesbean.paginator.prev}">
+						<div class="slide-control left">
+							<!-- SVG ARROW -->
+							<svg class="svg-arrow">
+								<use xlink:href="#svg-arrow"></use>
+							</svg>
+							<!-- /SVG ARROW -->
+						</div>
+						 <f:ajax render="repeater" execute="@this" /> 
+						         </h:commandLink>
+		
+<h:commandLink action="#{gamesbean.paginator.next}">
+						<div class="slide-control right">
+							<!-- SVG ARROW -->
+							<svg class="svg-arrow">
+								<use xlink:href="#svg-arrow"></use>
+							</svg>
+							<!-- /SVG ARROW -->
+						</div>
+						         <f:ajax render="repeater" execute="@this" /> 
+						         </h:commandLink>
+
+					</div>
+					<!-- /SLIDE CONTROLS -->
+				</div>
+				    <p:growl id="msgs" showDetail="true" />
+				<c:set var="test"  value="#{myLogBean.u.userId}"/>
+				<c:if test="${test >= 1 }">
+		<h:commandLink action="#{gamesbean.CreateGame()}">	<h:button class="button mid-short secondary open-new-message" value="New Game" /> </h:commandLink>		
+					</c:if>
+					
+					<!-- VIEW SELECTORS --> 
+    <h:inputText value="#{gamesbean.search}" class="button mid-short rounded search" style="color:black;height:32px;" a:placeholder="Search Game..." onfocus="this.value = this.value;">
+        <p:ajax event="keyup" update="repeater" listener="#{gamesbean.filterList()}" />
+    </h:inputText>   
+</div>
+            <!-- /HEADLINE -->
+				<!-- /HEADLINE -->
+
+					<!-- PRODUCT SHOWCASE -->
+				<div class="product-showcase">
+					<!-- PRODUCT LIST -->
+					<div class="product-list list">
+				<ui:repeat value="#{gamesbean.paginator.model}" var="subject" rendered="#{not empty   gamesbean.paginator.model}">
+		<!-- PRODUCT ITEM -->
+						<div class="product-item">
+						<h:panelGroup id="h" rendered="#{gamesbean.statusujet(myLogBean.u)}">						
+						<span class="pin">#{subject.status}</span>
+						</h:panelGroup>
+							<a href="item-v1.html">
+								<!-- PRODUCT PREVIEW IMAGE -->
+								<figure class="product-preview-image small">
+								<o:graphicImage value="#{gamesbean.afficherImage(subject.image)}" dataURI="true" alt="product-image" style="height:70px;width:70px;"/>
+								</figure>
+								<!-- /PRODUCT PREVIEW IMAGE -->
+							</a>
+
+							<!-- PRODUCT INFO -->
+							<div class="product-info">
+								<a href="item-v1.html">
+									<p class="text-header">#{subject.name}</p>
+								</a>
+								<p class="product-description">#{subject.content.subSequence(0,10)}</p>
+								<a href="shop-gridview-v1.html">
+									<p class="category tertiary">#{subject.category}</p>
+								</a>
+							</div>
+							<!-- /PRODUCT INFO -->
+
+							<!-- AUTHOR DATA -->
+							<div class="author-data">
+								<!-- USER RATING -->
+								<div class="user-rating">
+									<a href="author-profile.html">
+										<figure class="user-avatar small">
+											<img src="images/avatars/avatar_17.jpg" alt="user-avatar"/>
+										</figure>
+									</a>
+									<a href="author-profile.html">
+										<p class="text-header tiny">#{subject.utilisateursubject.login}</p>
+									</a>
+								</div>
+								<!-- /USER RATING -->
+
+								<!-- METADATA -->
+								<div class="metadata">
+									<!-- META ITEM -->
+									<div class="meta-item">
+										<span class="icon-bubble"></span>
+										<p>12</p>
+									</div>
+									<!-- /META ITEM -->
+
+									<!-- META ITEM -->
+									<div class="meta-item">
+										<span class="icon-eye"></span>
+										<p>#{subject.nbrview}</p>
+									</div>
+									<!-- /META ITEM -->
+
+									<!-- META ITEM -->
+									<div class="meta-item">
+										<span class="icon-heart"></span>
+										<p>105</p>
+									</div>
+									<!-- /META ITEM -->
+								</div>
+								<!-- /METADATA -->
+							</div>
+							<!-- /AUTHOR DATA -->
+
+							<!-- AUTHOR DATA REPUTATION -->
+							<div class="author-data-reputation">
+								<p class="text-header tiny">Reputation</p>
+								<ul class="rating">
+									<li class="rating-item">
+										<!-- SVG STAR -->
+										<svg class="svg-star">
+											<use xlink:href="#svg-star"></use>
+										</svg>
+										<!-- /SVG STAR -->
+									</li>
+									<li class="rating-item">
+										<!-- SVG STAR -->
+										<svg class="svg-star">
+											<use xlink:href="#svg-star"></use>
+										</svg>
+										<!-- /SVG STAR -->
+									</li>
+									<li class="rating-item">
+										<!-- SVG STAR -->
+										<svg class="svg-star">
+											<use xlink:href="#svg-star"></use>
+										</svg>
+										<!-- /SVG STAR -->
+									</li>
+									<li class="rating-item">
+										<!-- SVG STAR -->
+										<svg class="svg-star">
+											<use xlink:href="#svg-star"></use>
+										</svg>
+										<!-- /SVG STAR -->
+									</li>
+									<li class="rating-item empty">
+										<!-- SVG STAR -->
+										<svg class="svg-star">
+											<use xlink:href="#svg-star"></use>
+										</svg>
+										<!-- /SVG STAR -->
+									</li>
+								</ul>
+							</div>
+							<!-- /AUTHOR DATA REPUTATION -->
+
+							<!-- ITEM ACTIONS -->
+							<div class="item-actions">
+								<a href="#" class="tooltip" title="Add to Favourites">
+									<div class="circle tiny">
+										<span class="icon-heart"></span>
+									</div>
+								</a>
+							</div>
+							<!-- /ITEM ACTIONS -->
+
+							<!-- PRICE INFO -->
+							<div class="price-info">
+								<p  style="margin-left: 10px;">#{of:formatDate(subject.releasedate, 'dd.MM.yyyy')}</p>
+							</div>
+							<!-- /PRICE INFO -->
+						</div>
+			
+</ui:repeat>
+
+					</div>
+					<!-- /PRODUCT LIST -->
+				</div>
+				<!-- /PRODUCT SHOWCASE -->
+	
+
+				<div class="clearfix"></div>
+
+				</div>
+			<!-- CONTENT -->
+
+			<!-- SIDEBAR -->
+			<div class="sidebar">
+				<!-- DROPDOWN -->
+				<ul class="dropdown hover-effect secondary ">
+							<li class="dropdown-item active">
+								<h:commandLink actionListener="#{gamesbean.init()}" value="All">
+						<f:ajax render="repeater" execute="@this" />
+						</h:commandLink>
+					</li>
+					<li class="dropdown-item">
+								<h:commandLink action="#{gamesbean.findByThematic()}" value="Action &amp; Adventures">
+						<f:ajax render="repeater" execute="@this" />
+                       <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Action &amp; Adventures" />
+						</h:commandLink>
+					</li>
+					<li class="dropdown-item">
+
+						<h:commandLink actionListener="#{gamesbean.findByThematic()}" value="Sports">
+                       <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Sports" />
+						<f:ajax render="repeater" execute="@this" />
+						</h:commandLink>
+					
+</li>
+					<li class="dropdown-item">
+								<h:commandLink actionListener="#{gamesbean.findByThematic()}" value="Real-time strategy games">
+                       <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Real-time strategy games" />
+						<f:ajax render="repeater" execute="@this" />
+						</h:commandLink>
+					</li>
+					<li class="dropdown-item">
+								<h:commandLink actionListener="#{gamesbean.findByThematic()}" value="Racing">
+                       <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Racing" />
+						<f:ajax render="repeater" execute="@this" />
+						</h:commandLink>
+					</li>
+					<li class="dropdown-item">
+										<h:commandLink actionListener="#{gamesbean.findByThematic()}" value="Multiplayer">
+                       <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Multiplayer" />
+						<f:ajax render="repeater" execute="@this" />
+						</h:commandLink>
+					</li>
+				</ul>
+				<!-- /DROPDOWN -->
+
+
+
+			</div>
+			<!-- /SIDEBAR -->
+		</div>
+	</div>
+	<!-- /SECTION -->
+	</h:panelGroup>
+	
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"> 
+
+	<ui:composition template="/template/template.xhtml">
+	<ui:define name="content">
+		<!-- SECTION HEADLINE -->
+	<div class="section-headline-wrap v3">
+		<div class="section-headline">
+			<h2>Games</h2>
+			<p>Home<span class="separator">/</span><span class="current-section">Games</span></p>
+		</div>
+	</div>
+	<!-- /SECTION HEADLINE -->
+        <!-- DASHBOARD CONTENT -->
+        <div class="dashboard-content">
+ 
+
+			<!-- FORM BOX ITEMS -->
+			<div class="form-box-items">
+				<!-- FORM BOX ITEM -->
+				<div class="form-box-item full">
+					<h4>Post a new topic</h4>
+					<hr class="line-separator"/>
+					<h:form id="addgamer" enctype="multipart/form-data">
+						<div class="input-container">
+							<label  class="rl-label required">Name of the Game ()</label>
+							<h:inputText id="name" value="#{gamesbean.sujet.name}" label="Name" style="#{ component.valid ? 'border-color:#ebebeb;' : 'border-color:red;'}" validatorMessage="The length is less than : the minimum allowed value: 4 or the maximum allowed value: 30" >
+							<f:validateLength minimum="4" maximum="30"></f:validateLength>
+							</h:inputText>
+						  <h:message  for="name" style="color:red" />
+							
+						</div>
+				<div class="input-container">
+							<label class="rl-label required">Developer</label>
+							<h:inputText id="producer" style="#{ component.valid ? 'border-color:#ebebeb;' : 'border-color:red;'}" value="#{gamesbean.sujet.producer}" validatorMessage="The length is less than : the minimum allowed value: 2 or the maximum allowed value: 30" >
+								<f:validateLength minimum="2" maximum="30"></f:validateLength>
+							</h:inputText>			
+							<h:message  for="producer" style="color:red" />		
+						</div>
+	<div class="input-container">
+<label  class="rl-label required">Category</label>
+							        <h:selectOneMenu id="category" value="#{gamesbean.sujet.category}">
+            <f:selectItem itemLabel="PC" itemValue="PC" />
+            <f:selectItem itemLabel="Xbox 360" itemValue="Xbox 360" />
+            <f:selectItem itemLabel="Nintendo DS &amp; 3DS" itemValue="Nintendo DS &amp; 3DS" />
+            <f:selectItem itemLabel="Nintendo Wii" itemValue="Nintendo Wii" />
+			            <f:selectItem itemLabel="Jeux Mac" itemValue="Jeux Mac" />	
+			            </h:selectOneMenu>				
+						</div>
+							<div class="input-container">
+<label  class="rl-label required">Image</label>
+<h:inputFile value="#{gamesbean.file}" a:accept="image/png,image/jpeg" ></h:inputFile>					</div>
+	<div class="input-container">
+	<label  class="rl-label required">Release date</label>
+	<h:inputText value="#{gamesbean.sujet.date}"  a:type="date" a:min="2000-01-01" a:max="2030-12-31">
+	<f:convertDateTime pattern="yyyy-MM-dd"/>
+	</h:inputText></div>
+	<div class="input-container">
+<label  class="rl-label required">Thematic</label>
+							        <h:selectOneMenu id="thematic" value="#{gamesbean.sujet.thematic}">
+            <f:selectItem itemLabel="Action &amp; Adventures" itemValue="Action &amp; Adventures" />
+            <f:selectItem itemLabel="Sports" itemValue="Sports" />
+            <f:selectItem itemLabel="Real-time strategy games" itemValue="Real-time strategy games" />
+            <f:selectItem itemLabel="Racing" itemValue="Racing" />
+	    <f:selectItem itemLabel="Multiplayer" itemValue="Multiplayer" />
+	    </h:selectOneMenu>					
+						</div>
+							<div class="input-container">
+								<label  class="rl-label required">Reviews</label>
+								<h:inputText a:type="number" value="#{gamesbean.sujet.rate}" a:min="0" a:max="5" validatorMessage="The rate is required !! the minimum allowed value:0 or the maximum allowed value: 5">
+								</h:inputText>
+						</div>
+	<div class="input-container">
+	<label  class="rl-label">Gameplay</label>
+    <p:fileUpload value="#{gamesbean.video}" mode="simple" skinSimple="true" a:accept="video/*" />	
+</div>
+	<label  class="rl-label required">Content</label>
+
+    <h:inputTextarea  rows="10" style="#{ component.valid ? 'border-color:#ebebeb;' : 'border-color:red;'}" id="contentS" value="#{gamesbean.sujet.content}" validatorMessage="The length is less than  the minimum allowed value: 20 " >
+    <f:validateLength minimum="20"></f:validateLength>
+    </h:inputTextarea> 
+    <h:message  for="contentS" style="color:red" />		
+    <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+        <h:outputText id="display" value="#{gamesbean.sujet.content}" escape="false" />
+    </p:dialog>
+						<hr class="line-separator"/>
+						
+						<h:commandButton id="kolo" class="button big dark"  action="#{gamesbean.ajoutGames()}" value="Submit">
+						<f:setPropertyActionListener value="#{myLogBean.u}" target="#{gamesbean.sujet.utilisateursubject}"></f:setPropertyActionListener>
+						</h:commandButton>
+					</h:form>
+				</div>
+			</div>
+
+	
+
+			<div class="clearfix"></div>
+        </div>
+	</ui:define>
+	</ui:composition>
+</html>

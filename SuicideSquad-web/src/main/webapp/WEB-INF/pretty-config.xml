@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.2
+   http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.2.xsd">
+
+    <url-mapping id="index">
+        <pattern value="/" />
+        <view-id value="/pages/index.jsf" />
+    </url-mapping>
+      <url-mapping id="games">
+        <pattern value="/games" />
+        <view-id value="/pages/games.jsf" />
+    </url-mapping>
+       <url-mapping id="dashboardgame">
+        <pattern value="/dashboard/games" />
+        <view-id value="/pages/dashboard/games.jsf" />
+    </url-mapping>
+</pretty-config>
