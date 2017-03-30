@@ -1,8 +1,9 @@
 package tn.esprit.entities;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.Date;
-import java.util.List;
+
 
 import javax.persistence.*;
 import tn.esprit.entities.Users;
@@ -23,10 +24,7 @@ public class Moderator extends Users implements Serializable {
 		super();
 	}
 
-	public Moderator(String login, String pwd, String image, Date date, String mail, String nom) {
-		super(login, pwd, image, date, mail, nom);
-		// TODO Auto-generated constructor stub
-	}
+	
 	/*
 	@OneToMany(mappedBy="moderateur",fetch=FetchType.EAGER)
 	public List<Section> getSectionmodere() {
@@ -37,9 +35,18 @@ public class Moderator extends Users implements Serializable {
 		this.sectionmodere = sectionmodere;
 	}*/
 
+	
+
+
 	public int getReward() {
 		return reward;
 	}
+
+	public Moderator(int userId, String login, String pwd, Blob image, Date date, String mail, String nom) {
+		super(userId, login, pwd, image, date, mail, nom);
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public void setReward(int reward) {
 		this.reward = reward;

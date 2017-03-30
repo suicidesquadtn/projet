@@ -5,7 +5,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:xlink="http://www.w3.org/1999/xlink"
       xmlns:svg="http://www.w3.org/2000/svg"
-       xmlns:p="http://primefaces.org/ui">  
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:o="http://java.sun.com/jsf/html"
+      >  
        
 
 	<ui:composition template="/template/tempdashboard.xhtml">
@@ -28,7 +31,8 @@
         <h:outputText value="#{former.date}" />
     </p:column>
  <p:column headerText="image">
-        <h:outputText value="#{former.image}" />
+     <o:graphicImage value="#{formateurBean.afficherImage(former.imageUser)}" dataURI="true" />
+ 
     </p:column>
  
  
@@ -74,7 +78,7 @@
 <h:outputText value="#{formateurBean.nbrComments}" />
 
 	</h:form>
-	<h:form rendered="#{formateurBean.visible}">
+	<h:form rendered="#{formateurBean.visible}"  enctype="multipart/form-data">
 	<h:panelGrid columns="3">
 <h:outputText value="Nom:" />
 <h:inputText id="nomF" value="#{formateurBean.moderator.nom}" validatorMessage="Verifier le nom" >
@@ -87,6 +91,9 @@
 <f:validateRegex pattern="[a-zA-Z+1-9+]+"></f:validateRegex>
 </h:inputText>
 <h:message for="logF" style="color:red"/>
+
+<h:outputText value="Image :" />
+<h:inputFile value="#{formateurBean.file}" a:accept="image/png,image/jpeg" ></h:inputFile>
 
 <h:outputText  value="Password:" />
 <h:inputText id="pwdF" value="#{formateurBean.moderator.pwd}" > 
@@ -111,8 +118,9 @@
 
 
 
-<h:commandButton action="#{formateurBean.doUpdate()}" value="Valider" />
-
+<h:commandButton action="#{formateurBean.doUpdate()}" value="Valider" >
+<f:setPropertyActionListener value="#{formateurBean.moderator.imageUser}" target="#{formateurBean.uploadImage}"></f:setPropertyActionListener>
+</h:commandButton>
 </h:panelGrid>
 
 	</h:form>
@@ -134,7 +142,6 @@
         <h:outputText value="#{former.date}" />
     </p:column>
  <p:column headerText="image">
-        <h:outputText value="#{former.image}" />
     </p:column>
  
  

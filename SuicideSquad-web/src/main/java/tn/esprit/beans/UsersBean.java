@@ -1,5 +1,9 @@
 
 package tn.esprit.beans;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +14,10 @@ import javax.ejb.Schedule;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialException;
+
+import org.apache.commons.io.IOUtils;
 
 import tn.esprit.entities.Moderator;
 import tn.esprit.entities.Section;
@@ -25,7 +33,8 @@ public class UsersBean {
   private String nbrComments;
   private List<SelectItem> selectItemsForSections;
   private int selectedSectionId = -1;
-  
+  private Part file;
+  private Blob UploadImage;
   @EJB
   gestionUtilisateursLocal myService;
   
@@ -79,14 +88,24 @@ public String doDelete(Users u){
 
 
 
-public String doUpdate(){
+public String doUpdate() throws IOException, SerialException, SQLException{
+	if(file!=null){
+	    InputStream is=file.getInputStream();
+	    byte[] content = IOUtils.toByteArray(is);
+	    Blob blob = new javax.sql.rowset.serial.SerialBlob(content);
+	    Moderator.setImageUser(blob);
+	    }
+		else{
+			Moderator.setImageUser(UploadImage);
+		}
+	
 	Date date = new Date();
 	Moderator.setDate(date);
 	Moderator.setSection(myService.findSectionById(selectedSectionId));
 	myService.Update(Moderator);
 	setVisible(false);
 	init();
-	return null;
+	return ("Moderator");
 }
 public String initialiser(){
 	Moderator=new Moderator();
@@ -124,7 +143,21 @@ public String getNbrComments() {
 public void setNbrComments(String nbrComments) {
 	this.nbrComments = nbrComments;
 }
-
+public Part getFile() {
+	return file;
+}
+public void setFile(Part file) {
+	this.file = file;
+}
+public Blob getUploadImage() {
+	return UploadImage;
+}
+public void setUploadImage(Blob uploadImage) {
+	UploadImage = uploadImage;
+}
+public byte[] afficherImage(Blob image) throws SQLException{
+   	return image.getBytes(1, (int) image.length());
+}
 
 
 }

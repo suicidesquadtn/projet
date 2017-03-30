@@ -378,15 +378,15 @@
 				<div class="outer-ring">
 					<div class="inner-ring"></div>
 					<figure class="user-avatar">
-						<img src="#{request.contextPath}/resources/images/avatars/avatar_01.jpg" alt="avatar"/>
+						<img src="#{request.contextPath}/resources/images/avatars/images.png" alt="avatar"/>
 					</figure>
 				</div>
 				</a>
 				<!-- /USER AVATAR -->
 
 				<!-- USER INFORMATION -->
-				<p class="user-name">Johnny Fisher</p>
-				<p class="user-money">$745.00</p>
+				<p class="user-name">#{myLogBean.login}</p>
+				<p class="user-money">#{MembreBean.m.grade}</p>
 				<!-- /USER INFORMATION -->
 			</div>
 			<!-- /USER QUICKVIEW -->

@@ -2,6 +2,7 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -46,8 +47,12 @@ public class Member extends Users implements Serializable {
 	}
 
 
-	public Member(String login, String pwd, String image, Date date, String mail, String nom) {
-		super(login, pwd, image, date, mail, nom);
+
+
+	
+
+	public Member(int userId, String login, String pwd, Blob image, Date date, String mail, String nom) {
+		super(userId, login, pwd, image, date, mail, nom);
 		// TODO Auto-generated constructor stub
 	}
 

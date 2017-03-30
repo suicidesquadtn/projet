@@ -48,7 +48,9 @@ public String verifier(){
 	 setIsLoggedIn(true); 
 	 return "index"; }
  else
- return null;
+	 setMessage("Probleme de mot de passe ou identifiant");
+	 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info:", "Identifiant ou mot de passe incorrects"));
+	 return null;
  } 
 
 public String getMessage() {

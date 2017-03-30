@@ -2,9 +2,11 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.bean.RequestScoped;
 import javax.persistence.*;
 
 /**
@@ -12,6 +14,7 @@ import javax.persistence.*;
  *
  */
 @Entity
+
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Users implements Serializable {
 
@@ -19,7 +22,7 @@ public class Users implements Serializable {
 	private int UserId;
 	private String login;
 	private String pwd;
-	private String image;
+	private Blob imageUser;
 	private Date date;
 	private String mail;
 	private String nom;
@@ -60,13 +63,7 @@ public class Users implements Serializable {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}   
-	public String getImage() {
-		return this.image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}   
+	
 	public Date getDate() {
 		return this.date;
 	}
@@ -88,11 +85,15 @@ public class Users implements Serializable {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public Users(String login, String pwd, String image, Date date, String mail, String nom) {
+
+	
+	
+	public Users(int userId, String login, String pwd, Blob imageUser, Date date, String mail, String nom) {
 		super();
+		UserId = userId;
 		this.login = login;
 		this.pwd = pwd;
-		this.image = image;
+		this.imageUser = imageUser;
 		this.date = date;
 		this.mail = mail;
 		this.nom = nom;
@@ -161,6 +162,12 @@ public class Users implements Serializable {
 	}
 	public void setComments(List<Comments> comments) {
 		this.comments = comments;
+	}
+	public Blob getImageUser() {
+		return imageUser;
+	}
+	public void setImageUser(Blob imageUser) {
+		this.imageUser = imageUser;
 	}
 	
 	
