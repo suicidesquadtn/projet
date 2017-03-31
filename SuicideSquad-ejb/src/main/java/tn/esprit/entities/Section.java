@@ -23,6 +23,7 @@ public class Section implements Serializable {
 	private List<Subject> subjectssection;
 	private Blob image;
 	private Date releasedate;
+	private String description;
 	private static final long serialVersionUID = 1L;
 
 	public Section() {
@@ -69,6 +70,12 @@ public class Section implements Serializable {
 	}
 	public void setReleasedate(Date releasedate) {
 		this.releasedate = releasedate;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
    
 }
