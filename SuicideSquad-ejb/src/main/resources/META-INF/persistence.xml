@@ -3,7 +3,7 @@
 	<persistence-unit name="SuicideSquad-ejb">
 		<jta-data-source>java:/SuicideSquad</jta-data-source>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			  <property name="hibernate.connection.CharSet" value="utf8mb4"/>
 		</properties>
 	</persistence-unit>
