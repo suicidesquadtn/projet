@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -22,6 +23,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.mail.MessagingException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
@@ -47,8 +49,12 @@ public class GamesBean {
 	private String search;
 	private String thematic;
 	 private List<Subject> subjects=new ArrayList<Subject>();
+     List<Subject> subjsFiltered= new ArrayList<Subject>();
+     List<Subject> subjsFiltered2= new ArrayList<Subject>();
+    private Date date;
 	private Subject sujet= new Subject();
 	private Part file;
+	public String searchcat;
 	private UploadedFile video;
 	private Blob updateImage;
     @ManagedProperty(value="#{myLogBean}")
@@ -68,21 +74,11 @@ public class GamesBean {
 		subjects=new ArrayList<Subject>();
 		if(getLogbean().getU() instanceof Moderator){
 			System.out.println("Moderateur");
-	      List<Subject> subjs=gsl.findAll();
-	  	if(subjs!=null){
-			for(Subject s:subjs){
-				subjects.add(s);
-			}
-		}
+	      subjects=gsl.findAll();
 		}
 		else {
 			System.out.println("Autre"+getLogbean().getLogin());
-			List<Subject> subjs=gsl.findAccepted();
-			if(subjs!=null){
-				for(Subject s:subjs){
-					subjects.add(s);
-				}
-			}
+			subjects=gsl.findAccepted();
 		}
 	
     paginator = new RepeatPaginator(this.subjects);
@@ -181,21 +177,68 @@ public class GamesBean {
 		gsl.Update(s);
 		return "subjects";
 	}
-	public void findByThematic(){
-		System.out.println("no");
-        System.out.println(thematic);
-
-      List<Subject> sujet2=gsl.findByThematic(thematic);
-      subjects.clear();
-  	if(sujet2!=null){
-		for(Subject s:sujet2){
-			subjects.add(s);
+	public void FindByThemOrConsolOrDate(){
+		if((thematic!=null)&&(searchcat==null)){
+			System.out.println("searchtheme");
+			if(date==null){System.out.println("Date null");
+			subjsFiltered=subjects.stream().filter(p -> p.getThematic().toLowerCase().contains(thematic.toLowerCase())).collect(Collectors.toList());
+    	    paginator = new RepeatPaginator(subjsFiltered);}
+			if(date!=null){
+				System.out.println("searchtheme+date");
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String format = formatter.format(date);
+				System.out.println(format);
+				subjsFiltered =getSubjects().stream().filter(p -> p.getDate().toString().compareTo(format)==0 &&p.getThematic().toLowerCase().contains(thematic.toLowerCase())).collect(Collectors.toList());
+			    paginator = new RepeatPaginator(subjsFiltered);
 			}
-	    paginator = new RepeatPaginator(this.subjects);
+		}
+		if((searchcat!=null)&&(thematic==null)){
+			if(date==null){
+			System.out.println("searchcat");
+			subjsFiltered =subjects.stream().filter(p -> p.getCategory().toLowerCase().contains(searchcat.toLowerCase())).collect(Collectors.toList());
+    	    paginator = new RepeatPaginator(subjsFiltered);
+			}
+			if(date!=null){
+				System.out.println("searchcat+date");
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String format = formatter.format(date);
+				subjsFiltered =getSubjects().stream().filter(p -> p.getDate().toString().compareTo(format)==0 &&p.getCategory().toLowerCase().contains(searchcat.toLowerCase())).collect(Collectors.toList());
+			    paginator = new RepeatPaginator(subjsFiltered);
+			}
 
-		}	}
+		}
+		if((thematic!=null)&&(searchcat!=null)){
+			if(date==null){
+			System.out.println("les deux");
+			subjsFiltered=subjects.stream().filter(p -> p.getThematic().toLowerCase().contains(thematic.toLowerCase())&& p.getCategory().toLowerCase().contains(searchcat.toLowerCase())).collect(Collectors.toList());
+    	    paginator = new RepeatPaginator(subjsFiltered);
+			}
+			if(date!=null){
+				System.out.println("les trois");
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String format = formatter.format(date);
+				System.out.println(format);
+				subjsFiltered =getSubjects().stream().filter(p -> p.getDate().toString().compareTo(format)==0 &&p.getThematic().toLowerCase().contains(thematic.toLowerCase())&& p.getCategory().toLowerCase().contains(searchcat.toLowerCase())).collect(Collectors.toList());
+			    paginator = new RepeatPaginator(subjsFiltered);
+			}
 
-	public UploadedFile getVideo() {
+		}
+		if((thematic==null)&&(searchcat==null)){
+			System.out.println("j'ai ni thematic ni catégorie");
+			if(date==null){
+			init();
+			}
+			if(date!=null){
+				System.out.println("Date Seulement");
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String format = formatter.format(date);
+				System.out.println(format);
+				subjsFiltered =getSubjects().stream().filter(p -> p.getDate().toString().compareTo(format)==0).collect(Collectors.toList());
+			    paginator = new RepeatPaginator(subjsFiltered);
+			}
+		}
+	}
+public UploadedFile getVideo() {
 		return video;
 	}
 
@@ -239,12 +282,28 @@ public class GamesBean {
 		System.out.println("IN Filter");
 		System.out.println(search);
 		if(search!=null){
-		List<Subject> subjs2 =getSubjects().stream().filter(p -> p.getName().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
-	    paginator = new RepeatPaginator(subjs2);}
+	    if((thematic!=null)||(searchcat!=null)){
+	    	subjsFiltered2 =subjsFiltered.stream().filter(p -> p.getName().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
+		    paginator = new RepeatPaginator(subjsFiltered2);
+	    }
+	    else{
+		subjsFiltered =getSubjects().stream().filter(p -> p.getName().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
+		    paginator = new RepeatPaginator(subjsFiltered);
+	    }
+		}
 		else {
 			init();
 		}
 	}
+//	public void FilterDate(){
+//		System.out.println(date);
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//		String format = formatter.format(date);
+//		System.out.println(format);
+//		subjsFiltered =getSubjects().stream().filter(p -> p.getDate().toString().compareTo(format)==0).collect(Collectors.toList());
+//	    paginator = new RepeatPaginator(subjsFiltered);
+//	}
+//	
 	public String afficherVideo(String video){
 		return BASE_PATH+video;
 	}
@@ -274,4 +333,23 @@ public class GamesBean {
 		}
 		return false;
 	}
+
+
+	public String getSearchcat() {
+		return searchcat;
+	}
+
+	public void setSearchcat(String searchcat) {
+		this.searchcat = searchcat;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
 }
+

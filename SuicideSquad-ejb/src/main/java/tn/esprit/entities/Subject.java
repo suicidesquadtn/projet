@@ -134,6 +134,7 @@ public class Subject implements Serializable {
 	public void setVisibilitysubject(List<Visibility> visibilitysubject) {
 		this.visibilitysubject = visibilitysubject;
 	}
+    @Temporal(TemporalType.DATE) 
 	public Date getDate() {
 		return Date;
 	}

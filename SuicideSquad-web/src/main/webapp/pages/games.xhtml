@@ -73,7 +73,21 @@
     <h:inputText value="#{gamesbean.search}" class="button mid-short rounded search" style="color:black;height:32px;" a:placeholder="Search Game..." onfocus="this.value = this.value;">
         <p:ajax event="keyup" update="repeater" listener="#{gamesbean.filterList()}" />
     </h:inputText>   
-</div>
+
+            <h:selectOneMenu id="console" styleClass="button mid-short" style="width:125px" value="#{gamesbean.searchcat}">
+            <f:selectItem itemLabel="Search By Console" itemValue="" />
+            <f:selectItem itemLabel="PC" itemValue="PC" />
+            <f:selectItem itemLabel="Xbox 360" itemValue="Xbox 360" />
+            <f:selectItem itemLabel="Nintendo DS &amp; 3DS" itemValue="Nintendo DS &amp; 3DS" />
+            <f:selectItem itemLabel="Nintendo Wii" itemValue="Nintendo Wii" />
+			<f:selectItem itemLabel="Jeux Mac" itemValue="Jeux Mac" />	
+            <p:ajax event="change" process="@this" listener="#{gamesbean.FindByThemOrConsolOrDate()}" update="repeater" />
+        </h:selectOneMenu>
+        <h:inputText a:type="date" styleClass="button mid-short" value="#{gamesbean.date}" style="color:black;    border: 1px solid #ebebeb;"> 
+        	<f:convertDateTime pattern="yyyy-MM-dd"/>
+        <p:ajax event="change" process="@this" listener="#{gamesbean.FindByThemOrConsolOrDate()}" update="repeater" />
+        </h:inputText>
+</div> 
             <!-- /HEADLINE -->
 				<!-- /HEADLINE -->
 
@@ -226,39 +240,40 @@
 			<div class="sidebar">
 				<!-- DROPDOWN -->
 				<ul class="dropdown hover-effect secondary ">
-							<li class="dropdown-item active">
-								<h:commandLink actionListener="#{gamesbean.init()}" value="All">
-						<f:ajax render="repeater" execute="@this" />
+							<li class="dropdown-item #{gamesbean.thematic == '' ? 'active' : ''}">
+								<h:commandLink actionListener="#{gamesbean.FindByThemOrConsolOrDate()}" value="All">
+						<f:ajax render="repeater" execute="@this"/>
+						<f:setPropertyActionListener target="#{gamesbean.thematic}" value="" />	
 						</h:commandLink>
 					</li>
-					<li class="dropdown-item">
-								<h:commandLink action="#{gamesbean.findByThematic()}" value="Action &amp; Adventures">
+					<li class="dropdown-item #{gamesbean.thematic == 'Action &amp; Adventures' ? 'active' : ''}">
+								<h:commandLink action="#{gamesbean.FindByThemOrConsolOrDate()}" value="Action &amp; Adventures">
 						<f:ajax render="repeater" execute="@this" />
                        <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Action &amp; Adventures" />
 						</h:commandLink>
 					</li>
-					<li class="dropdown-item">
+					<li class="dropdown-item #{gamesbean.thematic == 'Sports' ? 'active' : ''}">
 
-						<h:commandLink actionListener="#{gamesbean.findByThematic()}" value="Sports">
+						<h:commandLink actionListener="#{gamesbean.FindByThemOrConsolOrDate()}" value="Sports">
                        <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Sports" />
 						<f:ajax render="repeater" execute="@this" />
 						</h:commandLink>
 					
 </li>
-					<li class="dropdown-item">
-								<h:commandLink actionListener="#{gamesbean.findByThematic()}" value="Real-time strategy games">
+					<li class="dropdown-item #{gamesbean.thematic == 'Real-time strategy games' ? 'active' : ''}">
+								<h:commandLink actionListener="#{gamesbean.FindByThemOrConsolOrDate()}" value="Real-time strategy games">
                        <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Real-time strategy games" />
 						<f:ajax render="repeater" execute="@this" />
 						</h:commandLink>
 					</li>
-					<li class="dropdown-item">
-								<h:commandLink actionListener="#{gamesbean.findByThematic()}" value="Racing">
+					<li class="dropdown-item #{gamesbean.thematic == 'Racing' ? 'active' : ''}">
+								<h:commandLink actionListener="#{gamesbean.FindByThemOrConsolOrDate()}" value="Racing">
                        <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Racing" />
 						<f:ajax render="repeater" execute="@this" />
 						</h:commandLink>
 					</li>
-					<li class="dropdown-item">
-										<h:commandLink actionListener="#{gamesbean.findByThematic()}" value="Multiplayer">
+					<li class="dropdown-item #{gamesbean.thematic == 'Multiplayer' ? 'active' : ''}">
+										<h:commandLink actionListener="#{gamesbean.FindByThemOrConsolOrDate()}" value="Multiplayer">
                        <f:setPropertyActionListener target="#{gamesbean.thematic}" value="Multiplayer" />
 						<f:ajax render="repeater" execute="@this" />
 						</h:commandLink>
