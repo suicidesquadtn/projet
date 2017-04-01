@@ -125,6 +125,9 @@
    <p:column headerText="image">
     <o:graphicImage value="#{sectionBean.afficherImage(section.image)}" dataURI="true" alt="product-image" style="height:150px;width:258px;"/>
     </p:column>
+    <p:column headerText="description">
+        <h:outputText value="#{section.description}" />
+    </p:column>
  
     <p:column>
         <h:commandButton action="#{sectionBean.supprimer(section)}" value="delete" />

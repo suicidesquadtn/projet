@@ -123,21 +123,28 @@
 					<h:form id="addsection" enctype="multipart/form-data">
 						<div class="input-container">
 							<label  class="rl-label required">Name section:</label>
-							<h:inputText value="#{sectionBean.section.nom}" />
+							<h:inputText value="#{sectionBean.section.nom}">
+							<f:validateLength minimum="5" maximum="15"></f:validateLength>
+							</h:inputText>
 						</div>
 						
 				<div class="input-container">
 							<label class="rl-label required">Image</label>
-           <h:inputFile value="#{sectionBean.file}" a:accept="image/png,image/jpeg" ></h:inputFile>									
+           <h:inputFile value="#{sectionBean.file}" a:accept="image/png,image/jpeg" >
+           <f:validateRequired></f:validateRequired>
+           </h:inputFile>	
+           								
 						</div>
 
 							<div class="input-container">
 											<label class="rl-label required">Description</label>		
-						<h:inputTextarea id="editor1" />
+						<h:inputTextarea id="editor1" value="#{sectionBean.section.description}" >
+					 <f:validateLength minimum="10" maximum="50" ></f:validateLength>
+					 </h:inputTextarea>
 </div>
 						<hr class="line-separator"/>
 						
-						<h:commandButton id="kolo" class="button big dark" action="#{sectionBean.modifier()}" value="Update">
+						<h:commandButton id="kolo" class="button big dark" action="#{sectionBean.modifier()}" value="Valider">
 						<f:setPropertyActionListener value="#{sectionBean.section.image}" target="#{sectionBean.uploadImage}"></f:setPropertyActionListener>
 						</h:commandButton>
 						<h:message for="kolo" />
