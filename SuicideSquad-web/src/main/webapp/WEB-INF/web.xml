@@ -33,7 +33,6 @@
 <filter-name>URLSessionFilter</filter-name>
 <filter-class>tn.esprit.filters.URLSessionFilter</filter-class>
 </filter>
-
 <filter-mapping>
 <filter-name>URLSessionFilter</filter-name>    
 <url-pattern>/*</url-pattern>

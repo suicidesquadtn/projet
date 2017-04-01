@@ -2,10 +2,6 @@ package tn.esprit.beans;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -26,9 +22,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import javax.sql.rowset.serial.SerialException;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.primefaces.model.UploadedFile;
 
 import tn.esprit.entities.Member;
 import tn.esprit.entities.Moderator;
@@ -52,12 +46,10 @@ public class GamesBean {
 	private Subject sujet= new Subject();
 	private Part file;
 	public String searchcat;
-	private UploadedFile video;
 	private Blob updateImage;
     @ManagedProperty(value="#{myLogBean}")
 	private LoginBean logbean;
     private RepeatPaginator paginator;
-    public static final String BASE_PATH = "file:\\C:\\Users\\Anas\\Desktop\\SuicideSquad\\SuicideSquad\\SuicideSquad-web\\src\\main\\uploadvideo\\";
 	public Subject getSujet() {
 		return sujet;
 	}
@@ -87,27 +79,14 @@ public class GamesBean {
 		return "games";
 	}
 	public String ajoutGames() throws IOException, MessagingException, SerialException, SQLException{
-        InputStream is=file.getInputStream();
+      System.out.println("sasasasas");
+		InputStream is=file.getInputStream();
         byte[] content = IOUtils.toByteArray(is);
         Blob blob = new javax.sql.rowset.serial.SerialBlob(content);
        sujet.setImage(blob);
 		Date date = new Date();
-		
 		sujet.setReleasedate(date);
-		System.out.println(video.getFileName());
 
-		if(video.getFileName().contains("java.io.BufferedInputStream")==true){
-		Path folder=Paths.get("C:/Users/Anas/Desktop/SuicideSquad/SuicideSquad/SuicideSquad-web/src/main/uploadvideo");
-
-		String extension = FilenameUtils.getExtension(video.getFileName());
-		String filename = FilenameUtils.getBaseName(video.getFileName()); 
-	    InputStream input2 = video.getInputstream();
-	    String w=input2.toString();
-	    w.replaceAll("-.*?.", "");
-	    System.out.println(w);
-	    Path newfile = Files.createTempFile(folder, filename + "-", "." + extension);
-	    Files.copy(input2, newfile, StandardCopyOption.REPLACE_EXISTING);
-        sujet.setVideo(newfile.getFileName().toString());}
         System.out.println(sujet.getUtilisateursubject() instanceof Member);
         System.out.println(sujet.getUtilisateursubject() instanceof Moderator);
 		if(sujet.getUtilisateursubject() instanceof Member){
@@ -121,7 +100,7 @@ public class GamesBean {
 		if(gsl.Add(sujet)){
 			System.out.println("je suis pas un Modérateur,je suis :"+logbean.getLogin());
 			init();
-			return "games";
+			return "/pages/games?faces-redirect=true";
 		}
      return "null";
 	}
@@ -241,13 +220,6 @@ public class GamesBean {
 			}
 		}
 	}
-public UploadedFile getVideo() {
-		return video;
-	}
-
-	public void setVideo(UploadedFile video) {
-		this.video = video;
-	}
     public String getPathVideo(){
         String relativeWebPath = "/resources/video/";
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -307,9 +279,6 @@ public UploadedFile getVideo() {
 //	    paginator = new RepeatPaginator(subjsFiltered);
 //	}
 //	
-	public String afficherVideo(String video){
-		return BASE_PATH+video;
-	}
 
 	public Blob getUpdateImage() {
 		return updateImage;

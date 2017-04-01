@@ -77,10 +77,6 @@
 								<h:inputText a:type="number" value="#{gamesbean.sujet.rate}" a:min="0" a:max="5" validatorMessage="The rate is required !! the minimum allowed value:0 or the maximum allowed value: 5">
 								</h:inputText>
 						</div>
-	<div class="input-container">
-	<label  class="rl-label">Gameplay</label>
-    <p:fileUpload value="#{gamesbean.video}" mode="simple" skinSimple="true" a:accept="video/*" />	
-</div>
 	<label  class="rl-label required">Content</label>
 
     <h:inputTextarea  rows="10" style="#{ component.valid ? 'border-color:#ebebeb;' : 'border-color:red;'}" id="contentS" value="#{gamesbean.sujet.content}" validatorMessage="The length is less than  the minimum allowed value: 20 " >
@@ -93,7 +89,6 @@
 						<hr class="line-separator"/>
 					
 						<h:commandButton id="kolo" class="button big dark"  action="#{gamesbean.ajoutGames()}" value="Submit">
-						<f:setPropertyActionListener value="#{myLogBean.u}" target="#{gamesbean.sujet.utilisateursubject}"></f:setPropertyActionListener>
 						</h:commandButton>
 					</h:form>
 				</div>
