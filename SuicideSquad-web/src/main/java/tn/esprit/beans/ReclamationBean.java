@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
  
 import org.primefaces.context.RequestContext;
@@ -19,9 +20,9 @@ import javax.ejb.EJB;
 
 import javax.faces.bean.ViewScoped;
 
-
+import tn.esprit.entities.Moderator;
 import tn.esprit.entities.Reclamation;
-
+import tn.esprit.entities.Users;
 import tn.esprit.services.gestionReclamationLocal;
 
 
@@ -32,7 +33,12 @@ public class ReclamationBean {
 	gestionReclamationLocal local;
 	private List<Reclamation> Reclamations = new ArrayList<Reclamation>();
 	private Reclamation u = new Reclamation(); 
+	private Users utilisateur;
 	 private boolean visible=false;
+	 
+	 
+	 @ManagedProperty(value="#{myLogBean}")
+	    private LoginBean logbean;
 	public Reclamation getU() {
 		return u;
 	}
@@ -51,7 +57,7 @@ public class ReclamationBean {
 		 return null;
 	}
 	public String doUpdate(){
-		local.update(u);
+		local.update(u);//jareb thbet feha ba3ed 
 		setVisible(false);
 		init();
 		return null;
@@ -93,6 +99,36 @@ public class ReclamationBean {
 		this.visible = visible;
 	}
 	 
-	     
+	public void doaddorupdate(){
+		System.out.println("je suis je suis je suis je suis :"+utilisateur.getNom());
+		String message="";
+		int id =1;// lazem twalli dynamike
+		if(local.filtercontenu(u.getContenu())== false){
+			message ="Thank you! your report has been submited";
+		//	local.test(u);
+			u.setModerator( (Moderator) utilisateur);
+			local.update(u);
+			
+			setVisible(false);
+			init();
+		}
+		else {
+			message ="You try to send unwanted content";	
+		}
+		FacesMessage facesmessage = new FacesMessage(message);
+		FacesContext.getCurrentInstance().addMessage(null, facesmessage);
+	}
+	public LoginBean getLogbean() {
+		return logbean;
+	}
+	public void setLogbean(LoginBean logbean) {
+		this.logbean = logbean;
+	}
+	public Users getUtilisateur() {
+		return utilisateur;
+	}
+	public void setUtilisateur(Users utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 	   
 }

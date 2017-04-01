@@ -108,7 +108,9 @@
 
 	<h:form>
 		<p:dataTable var="former" value="#{ReclamationBean.reclamations}">
-   
+   <f:facet name="header">
+					<h:messages style="color:red;" />
+			</f:facet>
  
     <p:column headerText="Titre">
         <h:outputText value="#{former.titre}" />
@@ -168,8 +170,9 @@
 		</h:inputText>
 		<h:message for="salaireF" style="color:red"/>
 	</div>
-<h:commandButton action="#{ReclamationBean.doUpdate()}" class="button mid-short secondary open-new-message" value="Valider" />
-
+<h:commandButton action="#{ReclamationBean.doaddorupdate()}" class="button mid-short secondary open-new-message" value="Valider" >
+<f:setPropertyActionListener value="#{myLogBean.u}" target="#{ReclamationBean.utilisateur}"></f:setPropertyActionListener>
+</h:commandButton>
 </h:panelGrid>
 	</h:form>
 </div>

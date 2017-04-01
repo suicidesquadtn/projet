@@ -32,6 +32,7 @@ public class UsersBean {
   private List<Moderator> Moderators=new ArrayList<Moderator>();
   private List<Section> sections = new ArrayList<Section>();
   private String nbrComments;
+  private String nbrReclamation;
   private List<SelectItem> selectItemsForSections;
   private int selectedSectionId = -1;
   private Part file;
@@ -72,7 +73,8 @@ public String doDelete(Users u){
 public void init(){ 
 
 List<Section> sections = myService.getAllSections();
-setNbrComments(myService.bestUser().getNom());
+//setNbrComments(myService.bestUser().getNom());
+setNbrReclamation(myService.bestModerator().getNom());
 
 selectItemsForSections = new ArrayList<SelectItem>(sections.size());
 for(Section section:sections){
@@ -160,6 +162,12 @@ public void setUploadImage(Blob uploadImage) {
 }
 public byte[] afficherImage(Blob image) throws SQLException{
    	return image.getBytes(1, (int) image.length());
+}
+public String getNbrReclamation() {
+	return nbrReclamation;
+}
+public void setNbrReclamation(String nbrReclamation) {
+	this.nbrReclamation = nbrReclamation;
 }
 
 

@@ -15,4 +15,6 @@ public interface gestionReclamationLocal {
 	public Reclamation findById(int id);
 	public Boolean delete(Reclamation u);
 	public List<Reclamation> findAll();
+	public boolean filtercontenu(String chaine);
+	public void test(Reclamation u);
 }

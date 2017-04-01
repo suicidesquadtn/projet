@@ -3,7 +3,7 @@ package tn.esprit.entities;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.util.Date;
-
+import java.util.List;
 
 import javax.persistence.*;
 import tn.esprit.entities.Users;
@@ -19,6 +19,7 @@ public class Moderator extends Users implements Serializable {
 	private int reward;
 	private static final long serialVersionUID = 1L;
 	 private Section section;
+	 private List<Reclamation> reclamations ;
 		
 	public Moderator() {
 		super();
@@ -61,6 +62,16 @@ public class Moderator extends Users implements Serializable {
 
 	public void setSection(Section section) {
 		this.section = section;
+	}
+
+	@OneToMany(mappedBy="moderator",fetch=FetchType.EAGER)
+	public List<Reclamation> getReclamations() {
+		return reclamations;
+	}
+
+
+	public void setReclamations(List<Reclamation> reclamations) {
+		this.reclamations = reclamations;
 	}
 
 

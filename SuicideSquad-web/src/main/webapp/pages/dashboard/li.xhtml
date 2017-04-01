@@ -73,6 +73,8 @@
 </p:dataTable>
 <h:commandButton action="#{formateurBean.initialiser()}" value="Ajouter" />
 <h:outputText value="#{formateurBean.nbrComments}" />
+<h:outputText value="Best Moderators :" />
+<h:outputText value="#{formateurBean.nbrReclamation}" />
 
 	</h:form>
 	<h:form rendered="#{formateurBean.visible}"  enctype="multipart/form-data">

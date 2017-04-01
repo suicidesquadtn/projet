@@ -22,7 +22,8 @@ public class Reclamation implements Serializable {
 	private String Contenu;
 	private Date DatePublication;
 	private String Etat="Non Valide";
-	private List<Users> usersList;
+	//private List<Users> usersList;
+	private Moderator moderator;
 	private static final long serialVersionUID = 1L;
 
 	public Reclamation() {
@@ -65,6 +66,7 @@ public class Reclamation implements Serializable {
 	public void setEtat(String Etat) {
 		this.Etat = Etat;
 	}
+	/*
 	@ManyToMany
 	public List<Users> getUsersList() {
 		return usersList;
@@ -72,5 +74,13 @@ public class Reclamation implements Serializable {
 	public void setUsersList(List<Users> usersList) {
 		this.usersList = usersList;
 	}
-   
+   */
+	@ManyToOne
+	@JoinColumn(name="userId",referencedColumnName="UserId",updatable=false,insertable=false)
+	public Moderator getModerator() {
+		return moderator;
+	}
+	public void setModerator(Moderator moderator) {
+		this.moderator = moderator;
+	}
 }

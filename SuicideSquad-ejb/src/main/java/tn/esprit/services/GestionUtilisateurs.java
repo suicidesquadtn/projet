@@ -238,5 +238,24 @@ public long nbrLikes(int id){
 				return query;
 	}	
 	
-	
+	@Override
+	public Moderator bestModerator() {
+		List<Moderator> Moderators = em.createQuery("SELECT u FROM Moderator u ", Moderator.class)
+				.getResultList();
+				long max=0;
+				Moderator bestModerat = new Moderator();
+				for (Moderator moderator : Moderators) {
+					long count =0;
+				long nbrRec = (long) em.createQuery("SELECT count(i.moderator.userId) FROM Moderator u JOIN u.reclamations i where u.userId=?1").setParameter(1,moderator.getUserId())
+						.getSingleResult();
+				System.out.println("iciiiiiiiiiiiiiiiiiii"+ nbrRec);
+				
+				count = nbrRec;
+				if (count>max){
+					max=count;
+					bestModerat=moderator;
+				}
+				}
+				return bestModerat;
+			}
 }

@@ -26,6 +26,6 @@ public interface gestionUtilisateursLocal {
 	long nbrLikes(int id);
 	long countUsers();
 	long countComments();
-	
+	public Moderator bestModerator();
 
 }
