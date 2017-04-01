@@ -10,10 +10,8 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -23,7 +21,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.mail.MessagingException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
@@ -51,7 +48,7 @@ public class GamesBean {
 	 private List<Subject> subjects=new ArrayList<Subject>();
      List<Subject> subjsFiltered= new ArrayList<Subject>();
      List<Subject> subjsFiltered2= new ArrayList<Subject>();
-    private Date date;
+    private Date date=null;
 	private Subject sujet= new Subject();
 	private Part file;
 	public String searchcat;
@@ -70,6 +67,7 @@ public class GamesBean {
 	}
 	@PostConstruct
 	public void init(){ 
+		System.out.println("aaaaaaaaaman ");
 	    FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		subjects=new ArrayList<Subject>();
 		if(getLogbean().getU() instanceof Moderator){
@@ -79,12 +77,15 @@ public class GamesBean {
 		else {
 			System.out.println("Autre"+getLogbean().getLogin());
 			subjects=gsl.findAccepted();
+		    paginator = new RepeatPaginator(this.subjects);
+
 		}
-	
     paginator = new RepeatPaginator(this.subjects);
-
+    redirectTo();
 	}
-
+	public String redirectTo(){
+		return "games";
+	}
 	public String ajoutGames() throws IOException, MessagingException, SerialException, SQLException{
         InputStream is=file.getInputStream();
         byte[] content = IOUtils.toByteArray(is);
@@ -118,6 +119,7 @@ public class GamesBean {
     	   sujet.setStatus(statusujet.Accepted);
        }
 		if(gsl.Add(sujet)){
+			System.out.println("je suis pas un Modérateur,je suis :"+logbean.getLogin());
 			init();
 			return "games";
 		}
@@ -144,11 +146,11 @@ public class GamesBean {
 	}
 	public String gotoInfopage(Subject sujet){
 		this.sujet=sujet;
-	    return "infogame";
+	    return "infogame?faces-redirect=true";
 	}
 	public String CreateGame(){
 		sujet= new Subject();
-		return "creategame";
+		return "creategame?faces-redirect=true";
 	}
 
 	public Part getFile() {
@@ -226,6 +228,7 @@ public class GamesBean {
 		if((thematic==null)&&(searchcat==null)){
 			System.out.println("j'ai ni thematic ni catégorie");
 			if(date==null){
+				System.out.println("datenull");
 			init();
 			}
 			if(date!=null){
@@ -325,6 +328,10 @@ public UploadedFile getVideo() {
 	}
 	public void accept(Subject s){
 		s.setStatus(statusujet.Accepted);
+		gsl.Update(s);
+	}
+	public void refuser(Subject s){
+		s.setStatus(statusujet.Refused);
 		gsl.Update(s);
 	}
 	public boolean statusujet(Users u){

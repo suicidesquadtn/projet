@@ -14,6 +14,8 @@
 	<ui:composition template="/template/template.xhtml">
 	<ui:define name="content">
 	<h:form>
+	    <p:remoteCommand name="initializePageDataCommand" autoRun="true" update="repeater"  action="#{gamesbean.init()}" />
+	
 		<h:panelGroup id="repeater">
 	
 		<!-- SECTION HEADLINE -->

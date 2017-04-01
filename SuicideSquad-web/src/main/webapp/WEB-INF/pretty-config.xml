@@ -12,6 +12,10 @@
         <pattern value="/games" />
         <view-id value="/pages/games.jsf" />
     </url-mapping>
+          <url-mapping id="creategames">
+        <pattern value="/creategames" />
+        <view-id value="/pages/creategame.jsf" />
+    </url-mapping>
        <url-mapping id="dashboardgame">
         <pattern value="/dashboard/games" />
         <view-id value="/pages/dashboard/games.jsf" />

@@ -12,8 +12,11 @@
 
 	<ui:composition template="/template/tempdashboard.xhtml">
 	<ui:define name="contentdash">
-
 	 <!-- DASHBOARD BODY -->
+	 <f:metadata>
+   <f:viewAction action="#{gamesbean.init()}" onPostBack="true"/>
+</f:metadata>
+	 
     <div class="dashboard-body">
         <!-- DASHBOARD HEADER -->
         <div class="dashboard-header retracted">
@@ -170,8 +173,7 @@
 
 						<!-- STARRED -->
 						<div class="starred">
-							<img src="#{request.contextPath}/resources/images/dashboard/star-empty.png" class="hidden" alt="star-empty"/>
-							<img src="#{request.contextPath}/resources/images/dashboard/star-filled.png" class="visible" alt="star-filled"/>
+						<span class="pin" style="left: -18px;">#{subject.status}</span>
 						</div>
 						<!-- /STARRED -->
 					</div>
@@ -205,7 +207,12 @@
 </h:commandLink>					</div>
 			<div class="inbox-message-type">
 				
-						<h:commandLink action="#{gamesbean.accept(subject)}"><span class="message-icon icon-check"></span></h:commandLink>
+						<h:commandLink action="#{gamesbean.refuser(subject)}"><span class="message-icon icon-close" style="color:red;"></span></h:commandLink>
+	
+					</div>
+								<div class="inbox-message-type">
+				
+						<h:commandLink action="#{gamesbean.accept(subject)}"><span class="message-icon icon-check" style="color:green;"></span></h:commandLink>
 	
 					</div>
 				</div>
