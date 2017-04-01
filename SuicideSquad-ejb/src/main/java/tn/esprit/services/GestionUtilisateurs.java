@@ -150,7 +150,7 @@ public class GestionUtilisateurs implements GestionUtilisateursRemote,gestionUti
 			long count =0;
 // 		long discution = (long) em.createQuery("SELECT count(d.user.id) FROM User u Join u.discutions d where u.id=?1 " ).setParameter(1,user.getId())
 // 				.getSingleResult();
-		long comment = (long) em.createQuery("SELECT count(i.userId) FROM Users u Join u.comments c JOIN c.IdComments i where u.userId=?1 " ).setParameter(1,user.getUserId())
+		long comment = (long) em.createQuery("SELECT count(i.users.userId) FROM Users u Join u.comments  i where u.userId=?1 " ).setParameter(1,user.getUserId())
 				.getSingleResult();
 // 		long rating = (long) em.createQuery("SELECT count(i.id) FROM User u Join u.rating r JOIN r.ratingId i where u.id=?1 " ).setParameter(1,user.getId())
 // 			.getSingleResult();
@@ -176,10 +176,10 @@ public class GestionUtilisateurs implements GestionUtilisateursRemote,gestionUti
 		int id=user.getUserId();
 		
 			long count =0;
-		long comment = (long) em.createQuery("SELECT count(i.userId) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
+		long comment = (long) em.createQuery("SELECT count(i.users.userId) FROM Users u Join u.comments  i where u.userId=?1 " ).setParameter(1,id)
 				.getSingleResult();
 	
-		long aimes = (long) em.createQuery("SELECT sum(c.aime) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
+		long aimes = (long) em.createQuery("SELECT sum(c.users.aime) FROM Users u Join u.comments  i where u.userId=?1 " ).setParameter(1,id)
 				.getSingleResult(); 
 		
 		
@@ -204,7 +204,7 @@ if((count>1)&&(m.getGrade()<5)){
 	}
 	@Override
 public long nbrComments(int id){
-	 long comment = (long) em.createQuery("SELECT count(i.userId) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
+	 long comment = (long) em.createQuery("SELECT count(i.users.userId) FROM Users u Join u.comments  i where u.userId=?1 " ).setParameter(1,id)
 			.getSingleResult();
 	 return comment;
 }
@@ -218,7 +218,7 @@ public long nbrSujets(int id){
 	
 	@Override
 public long nbrLikes(int id){
-		long aimes = (long) em.createQuery("SELECT sum(c.aime) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
+		long aimes = (long) em.createQuery("SELECT sum(i.aime) FROM Users u Join u.comments  i where u.userId=?1 " ).setParameter(1,id)
 				.getSingleResult(); 
 		System.out.println("test ************" + aimes +"**************");
 	 return aimes;

@@ -6,6 +6,7 @@
       xmlns:xlink="http://www.w3.org/1999/xlink"
       xmlns:svg="http://www.w3.org/2000/svg"
       xmlns:o="http://omnifaces.org/ui"
+            xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:of="http://omnifaces.org/functions"> 
 
 	<ui:composition template="/template/template.xhtml">
@@ -412,10 +413,13 @@
 								<!-- /USER AVATAR -->
 
 								<!-- COMMENT REPLY FORM -->
-								<form class="comment-reply-form">
-									<textarea name="treply1" placeholder="Write your comment here..."></textarea>
-									<button class="button primary">Post Comment</button>
-								</form>
+								<h:form class="comment-reply-form">
+									<h:inputTextarea value="#{commentsbean.comment.content}"  a:placeholder="Write your comment here..."/>
+									<h:commandButton styleClass="button primary"   action="#{commentsbean.doSaveOrUpdate()}" value="Post">
+<f:setPropertyActionListener value="#{myLogBean.u}" target="#{commentsbean.comment.users}"></f:setPropertyActionListener>
+<f:setPropertyActionListener value="#{gamesbean.sujet}" target="#{commentsbean.comment.sujet}"></f:setPropertyActionListener>
+									</h:commandButton>
+								</h:form>
 								<!-- /COMMENT REPLY FORM -->
 							</div>
 							<!-- /COMMENT REPLY -->
