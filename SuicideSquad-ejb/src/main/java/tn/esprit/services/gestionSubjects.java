@@ -83,4 +83,9 @@ public class gestionSubjects implements gestionSubjectsRemote, gestionSubjectsLo
 				.createQuery("SELECT s FROM Subject s  WHERE s.thematic like :thematic").setParameter("thematic", Thematic).getResultList();
 		return subjects;
 	}
+	@Override
+	public long countSub(){
+		long query=(long) em.createQuery("SELECT count(s) FROM Subject s").getSingleResult();
+		return query;
+	}
 }

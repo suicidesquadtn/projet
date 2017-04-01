@@ -19,10 +19,13 @@ public interface gestionUtilisateursLocal {
 	public Section findSectionById(int id);
 	public List<Moderator> findModeratorsBySections(Section section);
 	public List<Section> getAllSections();
-	Users bestUser();
-	void grade();
+	public Users bestUser();
+	public void grade();
 	long nbrComments(int id);
 	long nbrSujets(int id);
 	long nbrLikes(int id);
+	long countUsers();
+	long countComments();
+	
 
 }

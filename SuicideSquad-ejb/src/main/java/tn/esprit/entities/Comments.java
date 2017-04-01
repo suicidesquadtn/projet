@@ -2,6 +2,7 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -12,12 +13,15 @@ import javax.persistence.*;
 @Entity
 public class Comments implements Serializable {
 
-	private CommentsPk commentsId;
+	private int IdComments;
 	private int aime;
 	private String content;
+	private Date DateCreaton;
+	private Subject sujet;
+	private Users users;
+	
 
 	private static final long serialVersionUID = 1L;
-    Users users;
 	public Comments() {
 		super();
 	}   
@@ -28,16 +32,8 @@ public class Comments implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	@EmbeddedId
-	public CommentsPk getCommentsId() {
-		return commentsId;
-	}
-	public void setCommentsId(CommentsPk commentsId) {
-		this.commentsId = commentsId;
-	}
 
 	@ManyToOne
-	@JoinColumn(name="userId",referencedColumnName="UserId",updatable=false,insertable=false)
 	public Users getUsers() {
 		return users;
 	}
@@ -49,6 +45,27 @@ public class Comments implements Serializable {
 	}
 	public void setAime(int aime) {
 		this.aime = aime;
+	}
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	public int getIdComments() {
+		return IdComments;
+	}
+	public void setIdComments(int idComments) {
+		IdComments = idComments;
+	}
+	public Date getDateCreaton() {
+		return DateCreaton;
+	}
+	public void setDateCreaton(Date dateCreaton) {
+		DateCreaton = dateCreaton;
+	}
+	@ManyToOne
+	public Subject getSujet() {
+		return sujet;
+	}
+	public void setSujet(Subject sujet) {
+		this.sujet = sujet;
 	}
 	
 	

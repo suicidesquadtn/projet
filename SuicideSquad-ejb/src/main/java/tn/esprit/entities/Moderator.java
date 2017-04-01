@@ -42,8 +42,11 @@ public class Moderator extends Users implements Serializable {
 		return reward;
 	}
 
-	public Moderator(int userId, String login, String pwd, Blob image, Date date, String mail, String nom) {
-		super(userId, login, pwd, image, date, mail, nom);
+	
+
+
+	public Moderator(int userId, String login, String pwd, Blob imageUser, Date date, String mail, String nom) {
+		super(userId, login, pwd, imageUser, date, mail, nom);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -30,47 +30,30 @@
 					<!-- /USER AVATAR -->
 
 					<!-- USER INFORMATION -->
-					<p class="user-name">#{myLogBean.u.nom}</p>
+					<p class="user-name">Welcome #{myLogBean.u.nom}</p>
 					<!-- SVG ARROW -->
 					<svg class="svg-arrow">
 						<use xlink:href="#svg-arrow"></use>
 					</svg>
 					<!-- /SVG ARROW -->
-					<p class="user-money">$745.00</p>
+					<p class="user-money">#{myLogBean.u.mail}</p>
 					<!-- /USER INFORMATION -->
 
 					<!-- DROPDOWN -->
 					<ul class="dropdown small hover-effect closed">
-						<li class="dropdown-item">
-							<div class="dropdown-triangle"></div>
-							<a href="author-profile.html">Profile Page</a>
+						 <li  class="dropdown-item" jsf:rendered="#{myLogBean.ModerateurOrNot(myLogBean.u)}">
+							<a href="/SuicideSquad-web/pages/Profile.jsf">Profile Settings</a> 
 						</li>
 							
    <li  class="dropdown-item" jsf:rendered="#{myLogBean.ModerateurOrNot(myLogBean.u)}">
-							<a href="/SuicideSquad-web/pages/dashboard/li.jsf">Account Settings</a> 
+							<a href="/SuicideSquad-web/pages/dashboard/ModS.jsf">Members Accounts Settings</a> 
 							
    </li>
-						<li class="dropdown-item" >
-							<a href="dashboard-settings.html">Moez Settings</a>
-						</li>
-						<li class="dropdown-item">
-							<a href="dashboard-purchases.html">Your Purchases</a>
-						</li>
-						<li class="dropdown-item">
-							<a href="dashboard-statement.html">Sales Statement</a>
-						</li>
-						<li class="dropdown-item">
-							<a href="dashboard-buycredits.html">Buy Credits</a>
-						</li>
-						<li class="dropdown-item">
-							<a href="dashboard-withdrawals.html">Withdrawals</a>
-						</li>
-						<li class="dropdown-item">
-							<a href="dashboard-uploaditem.html">Upload Item</a>
-						</li>
-						<li class="dropdown-item">
-							<a href="dashboard-manageitems.html">Manage Items</a>
-						</li>
+						   <li  class="dropdown-item">
+							<a href="/SuicideSquad-web/pages/ProfileMem.jsf">Account Settings</a> 
+							
+   </li>
+						
 					</ul>
 					<!-- /DROPDOWN -->
 				</div>
@@ -321,7 +304,7 @@
 				<!-- ACCOUNT ACTIONS -->
 				<div class="account-actions">
 					
-	<h:commandButton action="#{myLogBean.logout()}" value="Logout"  class="button secondary"/>
+	<h:commandButton action="#{myLogBean.logout()}" value="Logout"  class="button medium secondary"/>
 				</div>
 	</h:form>
 </c:if>

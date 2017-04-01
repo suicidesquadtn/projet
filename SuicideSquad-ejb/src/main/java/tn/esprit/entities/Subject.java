@@ -37,6 +37,7 @@ public class Subject implements Serializable {
 	private Users utilisateursubject;
 	private List<Visibility> visibilitysubject;
 	private List<ClaimSubject> claimsubjects;
+	private List<Comments> commentaires;
 	private static final long serialVersionUID = 1L;
 
 	public Subject() {
@@ -184,6 +185,14 @@ public class Subject implements Serializable {
 
 	public void setStatus(statusujet status) {
 		this.status = status;
+	}
+    @OneToMany(mappedBy="sujet")
+	public List<Comments> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(List<Comments> commentaires) {
+		this.commentaires = commentaires;
 	}
 
    

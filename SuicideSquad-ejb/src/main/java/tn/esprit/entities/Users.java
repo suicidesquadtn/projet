@@ -24,6 +24,7 @@ public class Users implements Serializable {
 	private String pwd;
 	private Blob imageUser;
 	private Date date;
+	private boolean Subscriber;
 	private String mail;
 	private String nom;
 	private List<ClaimSubject> claimsubjectsuser;
@@ -168,6 +169,12 @@ public class Users implements Serializable {
 	}
 	public void setImageUser(Blob imageUser) {
 		this.imageUser = imageUser;
+	}
+	public boolean isSubscriber() {
+		return Subscriber;
+	}
+	public void setSubscriber(boolean subscriber) {
+		Subscriber = subscriber;
 	}
 	
 	

@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.Part;
@@ -25,7 +26,7 @@ import tn.esprit.entities.Users;
 import tn.esprit.services.gestionUtilisateursLocal;
  
 @ManagedBean(name="formateurBean")
-@ViewScoped
+@SessionScoped
 public class UsersBean {
   private Moderator Moderator=new Moderator();
   private List<Moderator> Moderators=new ArrayList<Moderator>();
@@ -66,26 +67,27 @@ public String doDelete(Users u){
 	 return null;
 }
 
+
 @PostConstruct
-	public void init(){ 
-	
-	List<Section> sections = myService.getAllSections();
-	setNbrComments(myService.bestUser().getNom());
-	selectItemsForSections = new ArrayList<SelectItem>(sections.size());
-	for(Section section:sections){
-		selectItemsForSections.add(new SelectItem(section.getSectionId(),section.getNom()));
-	}
-	Moderators=new ArrayList<Moderator>();
-	List<Users> users=myService.getAll();
-	if(users!=null){
-		for(Users u:users){
-			if(u instanceof Moderator){
-				Moderators.add((Moderator) u);
-			}
+public void init(){ 
+
+List<Section> sections = myService.getAllSections();
+setNbrComments(myService.bestUser().getNom());
+
+selectItemsForSections = new ArrayList<SelectItem>(sections.size());
+for(Section section:sections){
+	selectItemsForSections.add(new SelectItem(section.getSectionId(),section.getNom()));
+}
+Moderators=new ArrayList<Moderator>();
+List<Users> users=myService.getAll();
+if(users!=null){
+	for(Users u:users){
+		if(u instanceof Moderator){
+			Moderators.add((Moderator) u);
 		}
 	}
 }
-
+}
 
 
 public String doUpdate() throws IOException, SerialException, SQLException{
@@ -99,14 +101,15 @@ public String doUpdate() throws IOException, SerialException, SQLException{
 			Moderator.setImageUser(UploadImage);
 		}
 	
-	Date date = new Date();
-	Moderator.setDate(date);
-	Moderator.setSection(myService.findSectionById(selectedSectionId));
-	myService.Update(Moderator);
-	setVisible(false);
-	init();
-	return ("Moderator");
-}
+		Date date = new Date();
+		Moderator.setDate(date);
+		Moderator.setSection(myService.findSectionById(selectedSectionId));
+		myService.Update(Moderator);
+		setVisible(true);
+		init();
+		return null;
+	}
+
 public String initialiser(){
 	Moderator=new Moderator();
 	selectedSectionId = -1;

@@ -1,7 +1,11 @@
 package tn.esprit.beans;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.security.spec.MGF1ParameterSpec;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,17 +13,21 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialException;
+
+import org.apache.commons.io.IOUtils;
 
 import tn.esprit.entities.Member;
 import tn.esprit.entities.Users;
-
-
+import tn.esprit.services.gestionSubjectsLocal;
 import tn.esprit.services.gestionUtilisateursLocal;
 
 
 @ManagedBean(name="MembreBean")
-@ViewScoped
+@SessionScoped
 public class MembreBean implements Serializable {
 	/**
 	 * 
@@ -31,11 +39,20 @@ public class MembreBean implements Serializable {
 	private List<Member> ms = new ArrayList<Member>();
 	private long nbreC;
 	private long nbrSub;
+	private long nbrallSub;
+	private long nbrusers;
+	private long nbrallCom;
 	private long nbrLikes;
+	private Part file;
+	  private Blob UploadImage;
 	  private boolean visible=false;
 
 	@EJB  
 	gestionUtilisateursLocal gmlocal;
+	@EJB
+	gestionSubjectsLocal gmlo;
+	
+    
 	
 
 
@@ -64,6 +81,9 @@ public class MembreBean implements Serializable {
 	@PostConstruct
 	public void init(){ 
 		setUsers(gmlocal.getAll());
+		//setNbrallSub(gmlo.countSub());
+		
+		
 		ms=new ArrayList<Member>();
 	List<Users> users=gmlocal.getAll();
 	m=new Member();
@@ -82,7 +102,8 @@ public class MembreBean implements Serializable {
 	
 
 	
-	public void doUpdate(){
+	public void doUpdate() throws IOException, SerialException, SQLException{
+		
 		this.nbreC=gmlocal.nbrComments(m.getUserId());
 		this.nbrSub=gmlocal.nbrSujets(m.getUserId());
 		this.nbrLikes=gmlocal.nbrLikes(m.getUserId());
@@ -132,7 +153,16 @@ public class MembreBean implements Serializable {
 	public void setNbrLikes(long nbrLikes) {
 		this.nbrLikes = nbrLikes;
 	}
-	public String doUpdate1(){
+	public String doUpdate1() throws IOException, SerialException, SQLException{
+		if(file!=null){
+		    InputStream is=file.getInputStream();
+		    byte[] content = IOUtils.toByteArray(is);
+		    Blob blob = new javax.sql.rowset.serial.SerialBlob(content);
+		    m.setImageUser(blob);
+		    }
+			else{
+				m.setImageUser(UploadImage);
+			}
 		Date date = new Date();
 		m.setDate(date);
 		
@@ -155,7 +185,39 @@ public class MembreBean implements Serializable {
 	public void setUsers(List<Users> users) {
 		this.users = users;
 	}
-	
+	public Part getFile() {
+		return file;
+	}
+	public void setFile(Part file) {
+		this.file = file;
+	}
+	public Blob getUploadImage() {
+		return UploadImage;
+	}
+	public void setUploadImage(Blob uploadImage) {
+		UploadImage = uploadImage;
+	}
+	public byte[] afficherImage(Blob image) throws SQLException{
+	   	return image.getBytes(1, (int) image.length());
+	}
+	public long getNbrallSub() {
+		return nbrallSub;
+	}
+	public void setNbrallSub(long nbrallSub) {
+		this.nbrallSub = nbrallSub;
+	}
+	public long getNbrallCom() {
+		return nbrallCom;
+	}
+	public void setNbrallCom(long nbrallCom) {
+		this.nbrallCom = nbrallCom;
+	}
+	public long getNbrusers() {
+		return nbrusers;
+	}
+	public void setNbrusers(long nbrusers) {
+		this.nbrusers = nbrusers;
+	}
 	
 
 }

@@ -14,5 +14,6 @@ public interface gestionSubjectsRemote {
 	public boolean Update(Subject s);
 	Subject findById(int id);
 	public List<Subject> findByThematic(String Thematic);
+	public long countSub();
 
 }

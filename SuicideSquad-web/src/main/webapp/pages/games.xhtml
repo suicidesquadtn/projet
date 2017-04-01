@@ -103,7 +103,7 @@
 						<h:panelGroup id="h" rendered="#{gamesbean.statusujet(myLogBean.u)}">						
 						<span class="pin">#{subject.status}</span>
 						</h:panelGroup>
-							<h:commandLink action="#{gamesbean.goToUpdatePage(subject)}" >
+							<h:commandLink action="#{gamesbean.gotoInfopage(subject)}" >
 								<!-- PRODUCT PREVIEW IMAGE -->
 								<figure class="product-preview-image small">
 								<o:graphicImage value="#{gamesbean.afficherImage(subject.image)}" dataURI="true" alt="product-image" style="height:70px;width:70px;"/>

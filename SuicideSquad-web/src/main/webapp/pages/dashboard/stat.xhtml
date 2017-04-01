@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:o="http://java.sun.com/jsf/html"
+      >  
+       
+
+	<ui:composition template="/template/tempdashboard.xhtml">
+	<ui:define name="contentdash">
+		    <!-- DASHBOARD BODY -->
+    <div class="dashboard-body">
+        <!-- DASHBOARD HEADER -->
+        <div class="dashboard-content">
+	
+	<div class="headline buttons two primary">
+	 <h4>Statistics</h4>
+	 <h:form>
+	 
+				<h:commandButton action="#{myLogBean.init()}" class="button mid-short secondary open-new-message">
+				</h:commandButton>
+				</h:form>
+	</div>			
+	<div class="graph-stats-list">
+				<!-- GRAPH STATS LIST ITEM -->
+				<div class="graph-stats-list-item green bars">
+					<h2>#{myLogBean.numberUsers}</h2>
+					<p class="text-header">All Users</p>
+					
+				</div>
+				<!-- /GRAPH STATS LIST ITEM -->
+
+				<!-- GRAPH STATS LIST ITEM -->
+				<div class="graph-stats-list-item violet line">
+					<h2>#{MembreBean.nbrallSub}</h2>
+					<p class="text-header">All Subjects</p>
+					
+				</div>
+				<!-- /GRAPH STATS LIST ITEM -->
+
+				<!-- GRAPH STATS LIST ITEM -->
+				<div class="graph-stats-list-item blue step">
+					<h2>#{myLogBean.bestUser.nom}</h2>
+					<p class="text-header">The is a Best User</p>
+					
+				</div>
+				<!-- /GRAPH STATS LIST ITEM -->
+
+				<!-- GRAPH STATS LIST ITEM -->
+				<div class="graph-stats-list-item red curve">
+					<h2>65.254</h2>
+					<p class="text-header"></p>
+					<p>Avg 2175 per Day</p>
+				</div>
+				<!-- /GRAPH STATS LIST ITEM -->
+			</div>
+	
+	
+	
+</div>
+</div>
+	</ui:define>
+	</ui:composition>
+</html>

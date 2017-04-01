@@ -30,10 +30,7 @@
  <p:column headerText="date">
         <h:outputText value="#{former.date}" />
     </p:column>
- <p:column headerText="image">
-     <o:graphicImage value="#{formateurBean.afficherImage(former.imageUser)}" dataURI="true" />
  
-    </p:column>
  
  
     <p:column headerText="nom">
@@ -142,6 +139,7 @@
         <h:outputText value="#{former.date}" />
     </p:column>
  <p:column headerText="image">
+        <h:outputText value="#{former.imageUser}" />
     </p:column>
  
  
@@ -176,7 +174,7 @@
         </h:commandButton>
     </p:column>
 </p:dataTable>
-<h:commandButton action="#{MembreBean.initialiser()}" value="Ajouter" />
+
 
 
 	</h:form>
@@ -185,55 +183,19 @@
 	<h:form rendered="#{MembreBean.visible}">
 	<h:panelGrid >
 
-		<div class="col-md-8 col-sm-8">
-
-<h:outputText value="Nom:" />
-<h:inputText id="nomF" value="#{MembreBean.m.nom}" validatorMessage="Verifier le nom" >
-<f:validateRequired pattern="[a-zA-Z+1-9+]+"></f:validateRequired>
-</h:inputText>
-<h:message for="nomF" style="color:red"/>
-
-<h:outputText value="login:" />
-<h:inputText id="logF" value="#{MembreBean.m.login}" validatorMessage="verifier login">
-<f:validateRegex pattern="[a-zA-Z+1-9+]+"></f:validateRegex>
-</h:inputText>
-<h:message for="logF" style="color:red"/>
-
-<h:outputText  value="Password:" />
-<h:inputText id="pwdF" value="#{MembreBean.m.pwd}" > 
-<f:validateRegex pattern="[a-zA-Z+1-9+]+"></f:validateRegex>
-<f:validateLength minimum="1" maximum="10"></f:validateLength>
-</h:inputText>
-<h:message for="pwdF" style="color:red"/>
-
-
-
-
-<h:outputText  value="mail:" />
-<h:inputText id="mailF" value="#{MembreBean.m.mail}" > 
-</h:inputText>
-
-<h:outputText value="Section :" />
-
-
-
-
-
-<h:commandButton action="#{MembreBean.doUpdate1()}" value="Valider" />
-
-
-</div>
-
-
-
-	<div class="col-md-4 col-sm-12">
 <div class="form-box-item">
-					<h4>Statistiques #{MembreBean.m.nom}</h4>
-					<hr class="line-separator"/>
+					<h4>Your statistic</h4>
+					
 					<!-- TEXT ICONS -->
 					<div class="text-icons">
 						<!-- TEXT ICON -->
-
+						<div class="text-icon light">
+							<div class="ticon green">
+								<span class="sl-icon icon-tag"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.nbreC}</p>
+							<p>Number of comments shared</p>
+						</div>
 						<!-- /TEXT ICON -->
 
 						<!-- TEXT ICON -->
@@ -256,9 +218,13 @@
 						</div>
 						<!-- /TEXT ICON -->
 
+						<!-- TEXT ICON -->
+						
+						<!-- /TEXT ICON -->
 
-
-
+						<!-- TEXT ICON -->
+						
+						<!-- /TEXT ICON -->
 
 						<!-- TEXT ICON -->
 						<div class="text-icon light">
@@ -278,12 +244,10 @@
 							<span class="sl-icon icon-bubble"></span>
 						</div>
 						<p class="text-header mid">#{MembreBean.nbreC}</p>
-						<p >Number of comments shared</p>
-						</div>
+						<p>Number of comments shared</p>
+					</div>
 					<!-- /TEXT ICON -->
 				</div>
-				
-</div>
 
 </h:panelGrid>
 	</h:form>

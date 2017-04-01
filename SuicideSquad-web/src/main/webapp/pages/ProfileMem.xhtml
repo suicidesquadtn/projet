@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:c="http://java.sun.com/jstl/core">
+      
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:svg="http://www.w3.org/2000/svg"
+	template="/template/template.xhtml">
+	<ui:define name="content">
+	<c:set var="test"  value="#{myLogBean.u.userId}"/>
+
+<c:if test="${test >= 1 }">
+		<h:form>
+			<!-- DASHBOARD CONTENT -->
+			<div class="dashboard-content">
+				<!-- HEADLINE -->
+				<div class="headline buttons primary">
+					<h4>Update your Profile</h4>
+					<h:commandButton 
+						class="button mid-short primary" value="Save Changes"
+						action="#{myLogBean.doUpdate1()}">
+						 <f:setPropertyActionListener value="#{true}" target="#{myLogBean.visible}"></f:setPropertyActionListener>
+
+        </h:commandButton>
+				</div>
+				<!-- /HEADLINE -->
+
+				<!-- FORM BOX ITEMS -->
+				<div class="form-box-items">
+					<!-- FORM BOX ITEM -->
+					<div class="form-box-item">
+						<h4>Profile Information</h4>
+						<hr class="line-separator" />
+						<!-- PROFILE IMAGE UPLOAD -->
+						<div class="profile-image">
+							<div class="profile-image-data">
+								<figure class="user-avatar medium">
+									<img
+										src="../resources/images/dashboard/profile-default-image.png"
+										alt="profile-default-image" />
+								</figure>
+								<p class="text-header">Profile Photo</p>
+								<p class="upload-details">Minimum size 70x70px</p>
+							</div>
+							<a href="#" class="button mid-short dark-light">Upload
+								Image...</a>
+						</div>
+						<!-- PROFILE IMAGE UPLOAD -->
+
+					
+							<!-- INPUT CONTAINER -->
+							<div class="input-container">
+								<label for="acc_name" class="rl-label required">Account
+									Name</label>
+								<h:inputText id="acc_name" name="acc_name"
+									value="#{myLogBean.u.nom}"
+									placeholder="Enter your account name here..." />
+							</div>
+							<!-- /INPUT CONTAINER -->
+
+                             <!-- INPUT CONTAINER -->
+							<div class="input-container half">
+								<label for="Login" class="rl-label">Login</label>
+								<h:inputText id="new_log" name="Login"
+									value="#{myLogBean.u.login}"
+									placeholder="Enter your Login here..." />
+							</div>
+							<!-- /INPUT CONTAINER -->
+
+
+
+							<!-- INPUT CONTAINER -->
+							<div class="input-container half">
+								<label for="new_pwd" class="rl-label">New Password</label>
+								<h:inputText type="password" id="new_pwd" name="new_pwd"
+									value="#{myLogBean.u.pwd}"
+									placeholder="Enter your password here..." />
+							</div>
+							<!-- /INPUT CONTAINER -->
+
+							
+
+							<!-- INPUT CONTAINER -->
+							<div class="input-container">
+								<label for="new_email" class="rl-label">Email</label>
+								<h:inputText type="email" id="new_email" name="new_email"
+									value="#{myLogBean.u.mail}"
+									placeholder="Enter your email address here..." />
+							</div>
+							
+							
+							<!-- /INPUT CONTAINER -->
+
+							<!-- INPUT CONTAINER -->
+							
+							<!-- /INPUT CONTAINER -->
+
+							<!-- INPUT CONTAINER -->
+							
+							<!-- /INPUT CONTAINER -->
+						
+					</div>
+					<!-- /FORM BOX ITEM -->
+
+					<!-- FORM BOX ITEM -->
+					<div class="form-box-item spaced">
+							<div class="col-md-4 col-sm-12">
+                      
+                      
+                       <div class="form-box-item">
+ 
+
+
+					<h4>Statistiques #{myLogBean.u.nom}</h4>
+					<hr class="line-separator"/>
+					<!-- TEXT ICONS -->
+					<div class="text-icons">
+						<!-- TEXT ICON -->
+
+						<!-- /TEXT ICON -->
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon blue">
+								<span class="sl-icon icon-cup"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.nbrSub}</p>
+							<p>Number of Subjects shared</p>
+						</div>
+						<!-- /TEXT ICON -->
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon red">
+								<span class="sl-icon icon-fire"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.m.grade}</p>
+							<p>Member grade</p>
+						</div>
+						<!-- /TEXT ICON -->
+
+
+
+
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon violet">
+								<span class="sl-icon icon-heart"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.nbrLikes}</p>
+							<p>Likes for comments</p>
+						</div>
+						<!-- /TEXT ICON -->
+					</div>
+					<!-- /TEXT ICONS -->
+
+					<!-- TEXT ICON -->
+					<div class="text-icon">
+						<div class="ticon green">
+							<span class="sl-icon icon-bubble"></span>
+						</div>
+						<p class="text-header mid">#{MembreBean.nbreC}</p>
+						<p >Number of comments shared</p>
+						</div>
+					<!-- /TEXT ICON -->
+				</div>
+				
+</div>
+					</div>
+					<!-- /FORM BOX ITEM -->
+
+
+				</div>
+				<!-- /FORM BOX -->
+			</div>
+			<!-- DASHBOARD CONTENT -->
+		</h:form>
+		
+		
+		</c:if>
+
+
+<c:if test="${test == null }">
+				<div class="account-actions no-space">
+       <h:link outcome="/pages/dashboard/reg" class="button primary">Register</h:link>
+	   <h:link outcome="/pages/Login" class="button secondary">Login</h:link>   
+	   				</div>
+	   
+</c:if>	
+		
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

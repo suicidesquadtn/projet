@@ -150,7 +150,7 @@ public class GestionUtilisateurs implements GestionUtilisateursRemote,gestionUti
 			long count =0;
 // 		long discution = (long) em.createQuery("SELECT count(d.user.id) FROM User u Join u.discutions d where u.id=?1 " ).setParameter(1,user.getId())
 // 				.getSingleResult();
-		long comment = (long) em.createQuery("SELECT count(i.userId) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,user.getUserId())
+		long comment = (long) em.createQuery("SELECT count(i.userId) FROM Users u Join u.comments c JOIN c.IdComments i where u.userId=?1 " ).setParameter(1,user.getUserId())
 				.getSingleResult();
 // 		long rating = (long) em.createQuery("SELECT count(i.id) FROM User u Join u.rating r JOIN r.ratingId i where u.id=?1 " ).setParameter(1,user.getId())
 // 			.getSingleResult();
@@ -166,7 +166,7 @@ public class GestionUtilisateurs implements GestionUtilisateursRemote,gestionUti
 
 	
 	@Override
-//	@Schedule(hour="*",minute="*",second="*/20")
+	//@Schedule(hour="*",minute="*",second="*/20")
 	public void grade() {
 		List<Users> users = em.createQuery("SELECT u FROM Users u ", Users.class)
 		.getResultList();
@@ -196,8 +196,8 @@ if((count>1)&&(m.getGrade()<5)){
 	em.merge(m);
 	Member m2 = em.createQuery("SELECT u FROM Member u where u.userId=?1 " ,Member.class).setParameter(1,id)
 			.getSingleResult();
-	//System.out.println(m2.getNom());
-	//System.out.println("---------------------------"+aimes+"---------------------");
+	System.out.println(m2.getNom());
+	System.out.println("---------------------------"+aimes+"---------------------");
 	
 }}
 		System.out.println("**************************************************************");
@@ -214,13 +214,29 @@ public long nbrSujets(int id){
 				.getSingleResult();
 	 return subject;
 }
+	
+	
 	@Override
 public long nbrLikes(int id){
 		long aimes = (long) em.createQuery("SELECT sum(c.aime) FROM Users u Join u.comments c JOIN c.commentsId i where u.userId=?1 " ).setParameter(1,id)
 				.getSingleResult(); 
 		System.out.println("test ************" + aimes +"**************");
 	 return aimes;
-}	
+}
+	
+// les commentaires de tous les users
+	@Override
+	public long countUsers() {
+		long query = (long) em.createQuery("SELECT count(u) FROM Users u")
+				.getSingleResult();
+				return query;
+	}	
+	@Override
+	public long countComments() {
+		long query = (long) em.createQuery("SELECT count(c) FROM comments c")
+				.getSingleResult();
+				return query;
+	}	
 	
 	
 }

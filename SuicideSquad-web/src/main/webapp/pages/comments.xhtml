@@ -14,7 +14,7 @@
          <h:body>
      <h:form id="master"> 
 <p:dataTable rendered="#{not empty commentsbean.comments}" value="#{commentsbean.comments}" var="ski"
-	rows="5" rowKey="#{ski.idComments}" paginator="true" paginatorPosition="bottom" 
+	rows="5" paginator="true" paginatorPosition="bottom" rowKey="#{ski.idComments}"
 	filteredValue="#{commentsbean.filtredComments}" 
 	selectionMode="single" selection="#{commentsbean.comment}" widgetVar="typesTable">
 					
@@ -34,8 +34,8 @@
 	  <h:outputText value="#{ski.content}" />
 	</p:column>
 	
-	<p:column headerText="Date creation" filterBy="#{ski.dateCreation}" filterMatchMode="contains">
-	  <h:outputText value="#{ski.dateCreation}" />
+	<p:column headerText="Date creation" filterBy="#{ski.dateCreaton}" filterMatchMode="contains">
+	  <h:outputText value="#{ski.dateCreaton}" />
 	</p:column>
 	
 	</p:dataTable>
@@ -43,10 +43,7 @@
 
 
 <p:commandButton icon="ui-icon-circle-plus" actionListener="#{commentsbean.doNew()}" value="new" update=":details"/>
-	</h:form>
-	
-	
-	
+	</h:form>	
 	<p:panel id="details" header="Comments details" visible="#{commentsbean.formDisplayed}">
 	<h:form rendered="#{commentsbean.formDisplayed}">
 	<h:panelGrid columns="5">

@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:o="http://java.sun.com/jsf/html"
+      >  
+       
+
+	<ui:composition template="/template/tempdashboard.xhtml">
+	<ui:define name="contentdash">
+		    <!-- DASHBOARD BODY -->
+    <div class="dashboard-body">
+        <!-- DASHBOARD HEADER -->
+        <div class="dashboard-content">
+	<div class="gradient">
+	<div class="headline filter primary">
+
+<h4>Gestion Membres</h4>
+            </div>
+
+	<h:form enctype="multipart/form-data">
+		<p:dataTable var="former" value="#{MembreBean.ms}">
+    <p:column headerText="Id">
+        <h:outputText value="#{former.userId}" />
+    </p:column>
+ <p:column headerText="date">
+        <h:outputText value="#{former.date}" />
+    </p:column>
+ 
+    <p:column headerText="nom">
+        <h:outputText value="#{former.nom}" />
+    </p:column>
+ 
+    <p:column headerText="login">
+        <h:outputText value="#{former.login}" />
+       
+    </p:column>
+ 
+    <p:column headerText="password">
+        <h:outputText value="#{former.pwd}" />
+    </p:column>
+    <p:column>
+     <h:commandButton value="IsActive:#{MembreBean.m.subscriber}" action="#{MembreBean.doActiveUser()}" >
+        
+        <f:setPropertyActionListener value="#{former}" target="#{MembreBean.m}"/>
+       
+        </h:commandButton>
+    </p:column>
+       <p:column>
+        <h:commandButton action="#{MembreBean.doDelete(former)}" value="delete" />
+    </p:column>
+          <p:column>
+      <h:commandButton  value="update" action="#{MembreBean.doUpdate()}" >
+       <f:setPropertyActionListener value="#{true}" target="#{MembreBean.visible}"></f:setPropertyActionListener>
+        <f:setPropertyActionListener value="#{former}" target="#{MembreBean.m}"></f:setPropertyActionListener>
+       
+       
+        </h:commandButton>
+    </p:column>
+</p:dataTable>
+
+
+	</h:form>
+
+	
+	
+
+
+
+	<div class="col-md-4 col-sm-12">
+<div class="form-box-item">
+					<h4>Statistiques #{MembreBean.m.nom}</h4>
+					<hr class="line-separator"/>
+					<!-- TEXT ICONS -->
+					<div class="text-icons">
+						<!-- TEXT ICON -->
+
+						<!-- /TEXT ICON -->
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon blue">
+								<span class="sl-icon icon-cup"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.nbrSub}</p>
+							<p>Number of Subjects shared</p>
+						</div>
+						<!-- /TEXT ICON -->
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon red">
+								<span class="sl-icon icon-fire"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.m.grade}</p>
+							<p>Member grade</p>
+						</div>
+						<!-- /TEXT ICON -->
+
+
+
+
+
+						<!-- TEXT ICON -->
+						<div class="text-icon light">
+							<div class="ticon violet">
+								<span class="sl-icon icon-heart"></span>
+							</div>
+							<p class="text-header mid">#{MembreBean.nbrLikes}</p>
+							<p>Likes for comments</p>
+						</div>
+						<!-- /TEXT ICON -->
+					</div>
+					<!-- /TEXT ICONS -->
+
+					<!-- TEXT ICON -->
+					<div class="text-icon">
+						<div class="ticon green">
+							<span class="sl-icon icon-bubble"></span>
+						</div>
+						<p class="text-header mid">#{MembreBean.nbreC}</p>
+						<p >Number of comments shared</p>
+						</div>
+					<!-- /TEXT ICON -->
+				</div>
+				
+</div>
+
+
+
+
+
+</div>
+</div>
+</div>
+	</ui:define>
+	</ui:composition>
+</html>
