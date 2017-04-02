@@ -6,6 +6,7 @@
       xmlns:xlink="http://www.w3.org/1999/xlink"
       xmlns:svg="http://www.w3.org/2000/svg"
       xmlns:o="http://omnifaces.org/ui"
+        xmlns:p="http://primefaces.org/ui"
             xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:of="http://omnifaces.org/functions"> 
 
@@ -321,7 +322,6 @@
 				<!-- /SIDEBAR ITEM -->
 			</div>
 			<!-- /SIDEBAR -->
-
 			<!-- CONTENT -->
 			<div class="content left">
 				<!-- POST -->
@@ -376,8 +376,10 @@
 <div class="post-tab xmtab" style="display: block;">				
 					<div class="tab-content void open">
 						<!-- COMMENTS -->
+						
 						<div class="comment-list">
 							<!-- COMMENT -->
+<ui:repeat value="#{commentsbean.comments}" var="comment" rendered="#{not empty   commentsbean.comments}">
 							<div class="comment-wrap">
 								<!-- USER AVATAR -->
 								<a href="user-profile.html">
@@ -387,17 +389,21 @@
 								</a>
 								<!-- /USER AVATAR -->
 								<div class="comment">
-									<p class="text-header">View as Customer</p>
+									<p class="text-header">#{comment.users.login}</p>
 									<!-- PIN -->
 									<span class="pin greyed">Purchased</span>
 									<!-- /PIN -->
-									<p class="timestamp">5 Hours Ago</p>
-									<a href="#" class="report">Report</a>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magnada. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in henderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+									<p class="timestamp">#{comment.dateCreaton}</p>
+									<h:form>
+										<h:commandLink action="#{commentsbean.doDelete(comment)}" style="color:red;" styleClass="report message-icon icon-trash"/>	</h:form>
+									<h:form>	<h:commandLink styleClass="report message-icon icon-pencil" style="color:#ffc000;left: 680px;"/>
+</h:form>
+									<p>#{comment.content}</p>
 								</div>
 							</div>			
 							<!-- LINE SEPARATOR -->
 							<hr class="line-separator"/>
+							</ui:repeat>
 							<!-- /LINE SEPARATOR -->
 
 							<h3>Leave a Comment</h3>
@@ -413,21 +419,20 @@
 								<!-- /USER AVATAR -->
 
 								<!-- COMMENT REPLY FORM -->
-								<h:form class="comment-reply-form">
+								<div class="comment-reply-form">
 									<h:inputTextarea value="#{commentsbean.comment.content}"  a:placeholder="Write your comment here..."/>
 									<h:commandButton styleClass="button primary"   action="#{commentsbean.doSaveOrUpdate()}" value="Post">
 <f:setPropertyActionListener value="#{myLogBean.u}" target="#{commentsbean.comment.users}"></f:setPropertyActionListener>
 <f:setPropertyActionListener value="#{gamesbean.sujet}" target="#{commentsbean.comment.sujet}"></f:setPropertyActionListener>
 									</h:commandButton>
-								</h:form>
+								</div>
 								<!-- /COMMENT REPLY FORM -->
 							</div>
 							<!-- /COMMENT REPLY -->
 						</div>
 						<!-- /COMMENTS -->
 					</div>
-					<!-- /TAB CONTENT -->
-
+					
 					<!-- TAB CONTENT -->
 					<div class="tab-content void closed">
 						<!-- COMMENTS -->
@@ -758,13 +763,11 @@
 	
 	</div>
 	</div>
-	
+
 			</div>
-			<!-- CONTENT -->
 		</div>
 	</div>
 	<!-- /SECTION -->
-	
 	</ui:define>
 	</ui:composition>
 </html>

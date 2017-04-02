@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
@@ -24,7 +25,10 @@ public class CommentsBean {
 	private List<Comments> comments=new ArrayList<Comments>();
 	private Comments comment = new Comments();
 	private List<Comments> filtredComments;
+	private Comments selectedComment;
 	private boolean formDisplayed = false;
+    @ManagedProperty(value="#{gamesbean}")
+	private GamesBean gb;
 	
 	private Date date;
 	
@@ -62,15 +66,16 @@ public class CommentsBean {
 	}
 	
 	
-public void doSaveOrUpdate(){
+public String doSaveOrUpdate(){
 
 		date = new Date();	
+		comment.setDateCreaton(date);
 		gcl.Update(comment);
 		comments = gcl.findAll();
 		init();
 		formDisplayed = false;	
+		 return null;
 	}
-	
 	public void doNew(){
 		comment = new Comments();
 		formDisplayed = true;
@@ -84,13 +89,13 @@ public void doSaveOrUpdate(){
 		
 	}
 	
-	public void doDelete(){
-		
+	public String doDelete(Comments comment){
+		System.out.println("je suis la");
+		System.out.println("je veux supprimer "+comment.getContent());
 		gcl.Delete(comment);
-		comments=gcl.findAll();
-		comments.forEach(System.out::println);
-		formDisplayed = false;
-	
+		comments = gcl.findAll();
+		init();
+		 return null;
 	}
 	
 	public void onRowSelect(SelectEvent event){
@@ -99,8 +104,10 @@ public void doSaveOrUpdate(){
 	
 	@PostConstruct
 	public void init(){
-		comments = gcl.findAll();
+		System.out.println("je suis la je suis la je suis la ::::"+gb.getSujet().getSubjectId());
+		comments = gcl.findBySubject(gb.getSujet());
 		comments.forEach(System.out::println);
+		
 	}
 
 	public Date getDate() {
@@ -109,5 +116,21 @@ public void doSaveOrUpdate(){
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Comments getSelectedComment() {
+		return selectedComment;
+	}
+
+	public void setSelectedComment(Comments selectedComment) {
+		this.selectedComment = selectedComment;
+	}
+
+	public GamesBean getGb() {
+		return gb;
+	}
+
+	public void setGb(GamesBean gb) {
+		this.gb = gb;
 	}
 }

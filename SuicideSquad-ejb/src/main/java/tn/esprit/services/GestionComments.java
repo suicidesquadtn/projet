@@ -80,4 +80,9 @@ public class GestionComments implements GestionCommentsRemote, GestionCommentsLo
 		return null;
 	}
 
+	@Override
+	public List<Comments> findBySubject(Subject s) {
+		return em.createQuery("select c from Comments c  where c.sujet=:s",Comments.class).setParameter("s", s).getResultList();
+	}
+
 }
