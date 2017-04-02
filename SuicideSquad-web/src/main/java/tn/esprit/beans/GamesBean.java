@@ -142,7 +142,7 @@ public class GamesBean {
     public byte[] afficherImage(Blob image) throws SQLException{
        	return image.getBytes(1, (int) image.length());
     	
-    }
+    } 
 	public List<Subject> getSubjects() {
 		return subjects;
 	}

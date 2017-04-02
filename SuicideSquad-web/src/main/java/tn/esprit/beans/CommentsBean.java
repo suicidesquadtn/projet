@@ -67,7 +67,6 @@ public class CommentsBean {
 	
 	
 public String doSaveOrUpdate(){
-
 		date = new Date();	
 		comment.setDateCreaton(date);
 		gcl.Update(comment);

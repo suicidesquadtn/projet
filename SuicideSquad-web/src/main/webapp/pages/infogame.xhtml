@@ -391,13 +391,15 @@
 								<div class="comment">
 									<p class="text-header">#{comment.users.login}</p>
 									<!-- PIN -->
-									<span class="pin greyed">Purchased</span>
+									<span class="pin greyed">Last Modification :
+									<h:outputFormat value="{0, date, dd-MM-yyyy hh:mm}">
+                                    <f:param value="#{comment.dateCreaton}" />
+                                    </h:outputFormat>
+									</span>
 									<!-- /PIN -->
-									<p class="timestamp">#{comment.dateCreaton}</p>
 									<h:form>
 										<h:commandLink action="#{commentsbean.doDelete(comment)}" style="color:red;" styleClass="report message-icon icon-trash"/>	</h:form>
-									<h:form>	<h:commandLink styleClass="report message-icon icon-pencil" style="color:#ffc000;left: 680px;"/>
-</h:form>
+	
 									<p>#{comment.content}</p>
 								</div>
 							</div>			
@@ -413,19 +415,20 @@
 								<!-- USER AVATAR -->
 								<a href="user-profile.html">
 									<figure class="user-avatar medium">
-										<img src="images/avatars/avatar_09.jpg" alt=""/>
+										<img src="/SuicideSquad-web/resources/images/avatars/avatar_06.jpg" alt=""/>
 									</figure>
 								</a>
 								<!-- /USER AVATAR -->
 
 								<!-- COMMENT REPLY FORM -->
+								<h:form>
 								<div class="comment-reply-form">
 									<h:inputTextarea value="#{commentsbean.comment.content}"  a:placeholder="Write your comment here..."/>
 									<h:commandButton styleClass="button primary"   action="#{commentsbean.doSaveOrUpdate()}" value="Post">
 <f:setPropertyActionListener value="#{myLogBean.u}" target="#{commentsbean.comment.users}"></f:setPropertyActionListener>
 <f:setPropertyActionListener value="#{gamesbean.sujet}" target="#{commentsbean.comment.sujet}"></f:setPropertyActionListener>
 									</h:commandButton>
-								</div>
+								</div></h:form>
 								<!-- /COMMENT REPLY FORM -->
 							</div>
 							<!-- /COMMENT REPLY -->

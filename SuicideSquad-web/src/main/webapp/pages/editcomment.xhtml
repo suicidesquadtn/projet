@@ -25,15 +25,15 @@
 				<div class="form-box-item full">
 					<h4>Edit Comment</h4>
 					<hr class="line-separator"/>
-					<h:form id="addgamer" enctype="multipart/form-data">
+					<h:form id="addgamer">
 						<div class="input-container">
 							<label  class="rl-label required">Name of the Subject:</label>
 							<p>#{commentsbean.comment.sujet.name}</p>
 						  <h:message  for="name" style="color:red" />
 						</div>
 	<label  class="rl-label required">Content of comments:</label>
-    <h:inputTextarea  rows="10" style="#{ component.valid ? 'border-color:#ebebeb;' : 'border-color:red;'}" id="contentS" value="#{commentsbean.comment.content}" validatorMessage="The length is less than  the minimum allowed value: 20 " >
-    <f:validateLength minimum="20"></f:validateLength>
+    <h:inputTextarea  rows="10" style="#{ component.valid ? 'border-color:#ebebeb;' : 'border-color:red;'}" id="contentS" value="#{commentsbean.comment.content}" validatorMessage="The length is less than  the minimum allowed value: 5 " >
+    <f:validateLength minimum="5"></f:validateLength>
     </h:inputTextarea> 
     <h:message  for="contentS" style="color:red" />		
 						<hr class="line-separator"/>
@@ -41,9 +41,6 @@
 					</h:form>
 				</div>
 			</div>
-
-	
-
 			<div class="clearfix"></div>
         </div>
 	</ui:define>
