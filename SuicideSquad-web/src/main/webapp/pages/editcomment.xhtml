@@ -37,7 +37,7 @@
     </h:inputTextarea> 
     <h:message  for="contentS" style="color:red" />		
 						<hr class="line-separator"/>
-				<h:commandButton id="kolo" class="button big dark"  action="#{commentsbean.doSaveOrUpdate()}" value="Submit"></h:commandButton>
+				<h:commandButton id="kolo" class="button big dark"  action="#{commentsbean.doUpdate(commentsbean.comment.sujet)}" value="Submit"></h:commandButton>
 					</h:form>
 				</div>
 			</div>

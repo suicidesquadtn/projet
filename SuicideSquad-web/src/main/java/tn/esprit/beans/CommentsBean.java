@@ -8,15 +8,15 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.SelectEvent;
 import tn.esprit.entities.Comments;
-
+import tn.esprit.entities.Subject;
 import tn.esprit.services.GestionCommentsLocal;
 
 @ManagedBean(name ="commentsbean")
-@ViewScoped
+@SessionScoped
 public class CommentsBean {
 
 	@EJB
@@ -70,11 +70,21 @@ public String doSaveOrUpdate(){
 		date = new Date();	
 		comment.setDateCreaton(date);
 		gcl.Update(comment);
-		comments = gcl.findAll();
+		comment=new Comments();
+		comments = gcl.findBySubject(gb.getSujet());
 		init();
 		formDisplayed = false;	
 		 return null;
 	}
+public String doUpdate(Subject s){
+	Date d=new Date();
+	comment.setDateCreaton(d);
+	gcl.Update(comment);
+	comments = gcl.findBySubject(gb.getSujet());
+	gb.gotoInfopage(s);
+	init();
+    return "infogame?faces-redirect=true";
+}
 	public void doNew(){
 		comment = new Comments();
 		formDisplayed = true;
@@ -83,7 +93,7 @@ public String doSaveOrUpdate(){
 	public void doCancel(){
 		
 		comment = new Comments();
-		comments=gcl.findAll();
+		comments=gcl.findBySubject(gb.getSujet());
 		formDisplayed = false;
 		
 	}
@@ -92,9 +102,16 @@ public String doSaveOrUpdate(){
 		System.out.println("je suis la");
 		System.out.println("je veux supprimer "+comment.getContent());
 		gcl.Delete(comment);
-		comments = gcl.findAll();
+		comments = gcl.findBySubject(gb.getSujet());
 		init();
 		 return null;
+	}
+	public String GoToUpdatePage(Comments comment){
+		this.comment=comment;
+		comments = gcl.findBySubject(gb.getSujet());
+		init();
+		return "editcomment";
+		
 	}
 	
 	public void onRowSelect(SelectEvent event){
@@ -103,6 +120,7 @@ public String doSaveOrUpdate(){
 	
 	@PostConstruct
 	public void init(){
+		comment=new Comments();
 		System.out.println("je suis la je suis la je suis la ::::"+gb.getSujet().getSubjectId());
 		comments = gcl.findBySubject(gb.getSujet());
 		comments.forEach(System.out::println);
@@ -111,6 +129,7 @@ public String doSaveOrUpdate(){
 
 	public Date getDate() {
 		return date;
+		
 	}
 
 	public void setDate(Date date) {

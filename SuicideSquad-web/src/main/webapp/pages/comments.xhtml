@@ -59,7 +59,7 @@
       <p:commandButton actionListener="#{commentsbean.doCancel}" value="cancel" update=":details"/>
       <h:panelGrid columns="2">
       <p:commandButton actionListener="#{commentsbean.doDelete}" value="delete" update=":master :details"/>
-      <p:commandButton actionListener="#{commentsbean.doSaveOrUpdate()}" value="save" update=":master :details"/>
+      <p:commandButton actionListener="#{commentsbean.doUpdate(commentsbean.comment.sujet)}" value="save" update=":master :details"/>
       </h:panelGrid>
         
     </h:panelGrid>

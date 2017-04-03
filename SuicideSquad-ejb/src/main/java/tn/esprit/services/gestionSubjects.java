@@ -1,12 +1,15 @@
 package tn.esprit.services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
+import tn.esprit.entities.Section;
 import tn.esprit.entities.Subject;
 
 /**
@@ -87,5 +90,16 @@ public class gestionSubjects implements gestionSubjectsRemote, gestionSubjectsLo
 	public long countSub(){
 		long query=(long) em.createQuery("SELECT count(s) FROM Subject s").getSingleResult();
 		return query;
+	}
+	@Override
+	public List<Object[]> subjectParMois(Section sec){
+		Date d =new Date();
+		Query q= em.createQuery("select count(*),YEAR(now()),MONTH(s.releasedate),sec.nom"
+				+ " from Subject s join s.section sec  where YEAR(:d)=YEAR(s.releasedate) AND sec=:sec "
+				+ "group by MONTH(s.releasedate) "
+				);
+		q.setParameter("d", d,TemporalType.DATE);
+		q.setParameter("sec",sec);
+		return q.getResultList();
 	}
 }

@@ -23,13 +23,19 @@ import javax.servlet.http.Part;
 import javax.sql.rowset.serial.SerialException;
 
 import org.apache.commons.io.IOUtils;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.BarChartSeries;
 
 import tn.esprit.entities.Member;
 import tn.esprit.entities.Moderator;
+import tn.esprit.entities.Section;
 import tn.esprit.entities.Subject;
 import tn.esprit.entities.Users;
 import tn.esprit.entities.statusujet;
 import tn.esprit.paginator.RepeatPaginator;
+import tn.esprit.services.GestionSectionLocal;
 import tn.esprit.services.gestionSubjectsLocal;
 
 @ManagedBean(name ="gamesbean")
@@ -50,6 +56,7 @@ public class GamesBean {
     @ManagedProperty(value="#{myLogBean}")
 	private LoginBean logbean;
     private RepeatPaginator paginator;
+    private List<Section> sections;
 	public Subject getSujet() {
 		return sujet;
 	}
@@ -74,6 +81,7 @@ public class GamesBean {
 		}
     paginator = new RepeatPaginator(this.subjects);
     redirectTo();
+    //NbrSubjectMonth();
 	}
 	public String redirectTo(){
 		return "games";
@@ -226,6 +234,7 @@ public class GamesBean {
         return servletContext.getRealPath(relativeWebPath);
     }
 
+    
 	public String getThematic() {
 		return thematic;
 	}
@@ -326,6 +335,13 @@ public class GamesBean {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+
+	public List<Section> getSections() {
+		return sections;
+	}
+
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
+	}
 }
 

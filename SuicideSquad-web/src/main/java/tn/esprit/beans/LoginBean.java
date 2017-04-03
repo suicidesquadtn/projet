@@ -67,7 +67,12 @@ public void setU(Users u) {
 }
 public String verifier(){
 	System.out.println("in verifier");
-	 u=myService.authentificate(login,password);
+	try {
+		 u=myService.authentificate(login,password);
+
+	} catch (NullPointerException e) {
+         return null;
+  	}
 
 //	 
 //	  if(u!=null){

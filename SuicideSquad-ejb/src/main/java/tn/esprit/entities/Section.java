@@ -77,5 +77,62 @@ public class Section implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((image == null) ? 0 : image.hashCode());
+		result = prime * result + ((moderators == null) ? 0 : moderators.hashCode());
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((releasedate == null) ? 0 : releasedate.hashCode());
+		result = prime * result + sectionId;
+		result = prime * result + ((subjectssection == null) ? 0 : subjectssection.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Section other = (Section) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (image == null) {
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
+			return false;
+		if (moderators == null) {
+			if (other.moderators != null)
+				return false;
+		} else if (!moderators.equals(other.moderators))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (releasedate == null) {
+			if (other.releasedate != null)
+				return false;
+		} else if (!releasedate.equals(other.releasedate))
+			return false;
+		if (sectionId != other.sectionId)
+			return false;
+		if (subjectssection == null) {
+			if (other.subjectssection != null)
+				return false;
+		} else if (!subjectssection.equals(other.subjectssection))
+			return false;
+		return true;
+	}
    
+	
 }

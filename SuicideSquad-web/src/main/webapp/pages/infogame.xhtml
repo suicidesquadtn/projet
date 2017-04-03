@@ -12,6 +12,9 @@
 
 	<ui:composition template="/template/template.xhtml">
 	<ui:define name="content">
+		 <f:metadata>
+   <f:viewAction action="#{commentsbean.init()}" onPostBack="true"/>
+</f:metadata>
 		<div class="section-headline-wrap">
 		<div class="section-headline">
 			<h2>Games</h2>
@@ -384,7 +387,7 @@
 								<!-- USER AVATAR -->
 								<a href="user-profile.html">
 									<figure class="user-avatar medium">
-										<img src="images/avatars/avatar_06.jpg" alt=""/>
+										<img src="/SuicideSquad-web/resources/images/avatars/avatar_06.jpg" alt=""/>
 									</figure>
 								</a>
 								<!-- /USER AVATAR -->
@@ -392,17 +395,23 @@
 									<p class="text-header">#{comment.users.login}</p>
 									<!-- PIN -->
 									<span class="pin greyed">Last Modification :
-									<h:outputFormat value="{0, date, dd-MM-yyyy hh:mm}">
+									<h:outputFormat value="{0, date, dd-MM-yyyy HH:mm}">
                                     <f:param value="#{comment.dateCreaton}" />
                                     </h:outputFormat>
 									</span>
 									<!-- /PIN -->
 									<h:form>
-										<h:commandLink action="#{commentsbean.doDelete(comment)}" style="color:red;" styleClass="report message-icon icon-trash"/>	</h:form>
-	
+																			<h:commandLink action="#{commentsbean.doDelete(comment)}" style="color:red;" styleClass="report message-icon icon-trash"/>
+									</h:form>
 									<p>#{comment.content}</p>
 								</div>
-							</div>			
+							</div>		
+																<h:form>
+										<h:commandLink action="#{commentsbean.GoToUpdatePage(comment)}" style="color:#13c100;left:680px;" styleClass="report message-icon icon-pencil"/>
+										
+										
+											</h:form>
+		
 							<!-- LINE SEPARATOR -->
 							<hr class="line-separator"/>
 							</ui:repeat>
