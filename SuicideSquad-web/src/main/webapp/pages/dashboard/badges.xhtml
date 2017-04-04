@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+       
+
+	<ui:composition template="/template/tempdashboard.xhtml">
+	<ui:define name="contentdash">
+		    <!-- DASHBOARD BODY -->
+    <div class="dashboard-body">
+        <!-- DASHBOARD HEADER -->
+        <div class="dashboard-content">
+
+
+<h2> Manage Badges</h2>   Badge's List
+<h:form enctype="multipart/form-data">
+<p:dataTable var="bad" 
+			 value="#{badgeBean.badges}" 
+			 border="1"
+			 multiViewState="true"
+			 rows="10" 
+			 rowKey="#{bad.name}"
+			 paginator="true"
+			 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+             rowsPerPageTemplate="5,10,15"
+             paginatorPosition="bottom"
+			 filteredValue="#{badgeBean.test1}"
+			 emptyMessage="No badges has been found!"
+			> 
+
+				<p:column headerText="Name" filterBy="#{bad.name}" filterMatchMode="contains">
+       			 <h:outputText value="#{bad.name}" />
+   				 </p:column>
+   				 
+   			
+
+ 				<p:column headerText="Description">
+       			 <h:outputText value="#{bad.description}" />
+   				 </p:column>
+   				 
+				<p:column headerText="Image">
+				<o:graphicImage value="#{badgeBean.afficherImage(bad.image)}" dataURI="true"  style="height:150px;width:250px;"/>
+   				 </p:column>
+   				   				
+   				 
+   				 <p:column headerText="Delete">
+   			      <h:commandButton action="#{badgeBean.doDelete(bad)}" value="Delete" />
+  				  </p:column>
+  				  
+  				  <p:column headerText="Update">
+   			      <h:commandButton value="Update" >
+   			      	<f:setPropertyActionListener value="#{bad}" target="#{badgeBean.badge}"></f:setPropertyActionListener>
+   			     	<f:setPropertyActionListener value="#{true}" target="#{badgeBean.visible}"></f:setPropertyActionListener>
+   			      </h:commandButton>
+  				  </p:column>
+	</p:dataTable> 
+	<h:commandButton action="#{badgeBean.initialiser()}" value="Add" />
+</h:form>
+
+<h:form rendered="#{badgeBean.visible}" enctype="multipart/form-data">
+			
+			<h:panelGrid columns="2" cellpadding="5"> 
+			
+					<h:outputText value="Name:" />
+					<br/><br/>
+					<h:inputText id="nameF" size="50" value="#{badgeBean.badge.name}" validatorMessage="*name must only contain letters"> 
+					<f:validateRequired></f:validateRequired>
+					<f:validateLength minimum="6" maximum="20"></f:validateLength>
+					<f:validateRegex pattern="[a-zA-Z]+"> </f:validateRegex>
+					</h:inputText>
+					<h:message for="nameF" style="color:red"/>
+					<br/><br/>
+					
+					
+					
+				
+						
+					<h:outputText value="Description:" />
+					<br/><br/>
+					<p:inputTextarea id="descriptionF" value="#{badgeBean.badge.description}"  rows="6" cols="33"  validatorMessage="*at least 10 letters">
+					<f:validateRequired></f:validateRequired>
+					<f:validateLength minimum="10" maximum="800"></f:validateLength>
+					</p:inputTextarea>
+					<h:message for="descriptionF" style="color:red"/>
+					<br/><br/>
+					
+				
+					<!--  <div class="col-xs-12 col-sm-3 center">
+					<span class="profile-picture">-->
+					<h:outputText value="Picture:" />
+					<br/><br/>
+					<p:graphicImage value="#{badgeBean.image}" cache="false" styleClass="catalog-picture">
+					</p:graphicImage>
+					<!-- </span> -->
+					<h:inputFile value="#{badgeBean.file}"></h:inputFile>
+					<br/><br/>
+					
+					
+				<!-- 	</div> -->
+							
+							<h:commandButton action="#{badgeBean.doAdd()}" value="Validate" /> 
+						
+							<h:commandButton action="#{badgeBean.doUpdate()}" value="Update" />
+							
+				</h:panelGrid> 
+			
+			</h:form>
+			<br />
+			<br />
+
+
+</div>
+</div>
+	</ui:define>
+	</ui:composition>
+</html>

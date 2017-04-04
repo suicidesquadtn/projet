@@ -2,6 +2,7 @@ package tn.esprit.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.sql.Blob;
 import java.util.List;
 
 import javax.persistence.*;
@@ -16,16 +17,19 @@ public class Badge implements Serializable {
 
 	
 	private int badgeId;
-	private String image;
+	private String name;
+	private Blob image;
 	private String description;
+	
 	private List<Attribution> attributions;
+
 	private static final long serialVersionUID = 1L;
 
 	public Badge() {
 		super();
-	}   
-		@Id    
-		@GeneratedValue(strategy=GenerationType.IDENTITY)
+		}   
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getBadgeId() {
 		return this.badgeId;
 	}
@@ -33,13 +37,7 @@ public class Badge implements Serializable {
 	public void setBadgeId(int badgeId) {
 		this.badgeId = badgeId;
 	}   
-	public String getImage() {
-		return this.image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}   
+   
 	public String getDescription() {
 		return this.description;
 	}
@@ -53,6 +51,34 @@ public class Badge implements Serializable {
 	}
 	public void setAttributions(List<Attribution> attributions) {
 		this.attributions = attributions;
+	}
+
+	public Blob getImage() {
+		return image;
+	}
+	
+	public void setImage(Blob image) {
+		this.image = image;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Badge(String name, Blob image, String description) {
+		super();
+		this.name = name;
+		this.image = image;
+		this.description = description;
+	}
+	
+	@PreRemove
+	public void preRemove() {
+		for (Attribution a : attributions)
+			a.setBadgeattribution(null);
 	}
    
 }

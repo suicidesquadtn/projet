@@ -20,7 +20,8 @@ public class Attribution implements Serializable {
 
 	public Attribution() {
 		super();
-	}   
+	}  
+	@Temporal(TemporalType.DATE)
 	public Date getDateAttribution() {
 		return this.DateAttribution;
 	}
@@ -51,6 +52,13 @@ public class Attribution implements Serializable {
 	}
 	public void setUserattribution(Users userattribution) {
 		this.userattribution = userattribution;
+	}
+	public Attribution(Date dateAttribution, Badge badgeattribution, Users userattribution) {
+		super();
+		DateAttribution = dateAttribution;
+		this.badgeattribution = badgeattribution;
+		this.userattribution = userattribution;
+		this.attributionId = new AttributionPk(badgeattribution.getBadgeId(), userattribution.getUserId());
 	}
    
 }

@@ -59,5 +59,11 @@ public class AttributionPk implements Serializable {
 			return false;
 		return true;
 	}
+
+	public AttributionPk(int badgeId, int userId) {
+		super();
+		this.badgeId = badgeId;
+		this.userId = userId;
+	}
    
 }

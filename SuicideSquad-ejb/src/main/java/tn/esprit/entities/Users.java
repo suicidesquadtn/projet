@@ -176,6 +176,10 @@ public class Users implements Serializable {
 	public void setSubscriber(boolean subscriber) {
 		Subscriber = subscriber;
 	}
-	
+	@PreRemove
+	public void preRemove() {
+		for (Attribution a : attributions)
+			a.setUserattribution(null);
+	}
 	
 }
