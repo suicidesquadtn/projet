@@ -129,7 +129,7 @@
 								<div class="user-rating">
 									<a href="author-profile.html">
 										<figure class="user-avatar small">
-											<img src="images/avatars/avatar_17.jpg" alt="user-avatar"/>
+											<img src="/SuicideSquad-web/resources/images/avatars/avatar_17.jpg" alt="user-avatar"/>
 										</figure>
 									</a>
 									<a href="author-profile.html">
@@ -169,42 +169,11 @@
 							<div class="author-data-reputation">
 								<p class="text-header tiny">Reputation</p>
 								<ul class="rating">
-									<li class="rating-item">
-										<!-- SVG STAR -->
-										<svg class="svg-star">
-											<use xlink:href="#svg-star"></use>
-										</svg>
-										<!-- /SVG STAR -->
-									</li>
-									<li class="rating-item">
-										<!-- SVG STAR -->
-										<svg class="svg-star">
-											<use xlink:href="#svg-star"></use>
-										</svg>
-										<!-- /SVG STAR -->
-									</li>
-									<li class="rating-item">
-										<!-- SVG STAR -->
-										<svg class="svg-star">
-											<use xlink:href="#svg-star"></use>
-										</svg>
-										<!-- /SVG STAR -->
-									</li>
-									<li class="rating-item">
-										<!-- SVG STAR -->
-										<svg class="svg-star">
-											<use xlink:href="#svg-star"></use>
-										</svg>
-										<!-- /SVG STAR -->
-									</li>
-									<li class="rating-item empty">
-										<!-- SVG STAR -->
-										<svg class="svg-star">
-											<use xlink:href="#svg-star"></use>
-										</svg>
-										<!-- /SVG STAR -->
-									</li>
-								</ul>
+								      <p:rating id="messages" value="#{subject.rate}" cancel="false" onRate="alert('You rated ' + value)" >
+					 <p:ajax event="rate" listener="#{gamesbean.mettrerate(subject.rate,subject)}" update="messages" />
+								      
+								      </p:rating>
+				</ul>
 							</div>
 							<!-- /AUTHOR DATA REPUTATION -->
 

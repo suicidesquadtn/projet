@@ -2,6 +2,7 @@ package tn.esprit.beans;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -40,7 +41,11 @@ import tn.esprit.services.gestionSubjectsLocal;
 
 @ManagedBean(name ="gamesbean")
 @SessionScoped
-public class GamesBean {
+public class GamesBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@EJB
 	private gestionSubjectsLocal gsl;
 	private String search;
@@ -107,7 +112,8 @@ public class GamesBean {
        }
 		if(gsl.Add(sujet)){
 			System.out.println("je suis pas un Modérateur,je suis :"+logbean.getLogin());
-			init();
+			init();	
+			sujet=new Subject();
 			return "/pages/games?faces-redirect=true";
 		}
      return "null";
@@ -342,6 +348,14 @@ public class GamesBean {
 
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
+	}
+
+	public void mettrerate(int rate,Subject s){
+		Subject sub=gsl.findById(s.getSubjectId());
+        System.out.println(sub.getRate());
+		System.out.println(Math.round(sub.getRate()+rate+1)/2);
+		s.setRate((int) (Math.round(sub.getRate()+rate+1)/2));
+		gsl.Update(s);
 	}
 }
 

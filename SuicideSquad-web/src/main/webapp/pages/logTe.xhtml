@@ -23,7 +23,7 @@
 					<div class="outer-ring">
 						<div class="inner-ring"></div>
 						<figure class="user-avatar">
-							<img src="images/avatars/avatar_01.jpg" alt="avatar"/>
+							<img src="/SuicideSquad-web/resources/images/avatars/avatar_01.jpg" alt="avatar"/>
 						</figure>
 					</div>
 					</a>
@@ -46,11 +46,15 @@
 						</li>
 							
    <li  class="dropdown-item" jsf:rendered="#{myLogBean.ModerateurOrNot(myLogBean.u)}">
-							<a href="/SuicideSquad-web/pages/dashboard/ModS.jsf">Members Accounts Settings</a> 
+							<a href="/SuicideSquad-web/pages/dashboard/games.jsf">Subjects</a> 
+							
+   </li>
+     <li  class="dropdown-item" jsf:rendered="#{myLogBean.ModerateurOrNot(myLogBean.u)}">
+							<a href="/SuicideSquad-web/pages/dashboard/games2.jsf">NumberSubjectsBySec</a> 
 							
    </li>
 						   <li  class="dropdown-item">
-							<a href="/SuicideSquad-web/pages/ProfileMem.jsf">Account Settings</a> 
+							<a href="/SuicideSquad-web/">Account Settings</a> 
 							
    </li>
 						
